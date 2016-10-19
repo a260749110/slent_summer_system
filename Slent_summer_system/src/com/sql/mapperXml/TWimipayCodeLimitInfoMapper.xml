@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sql.mapper.TWimipayCodeLimitInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.sql.bean.TWimipayCodeLimitInfo" >
+    <id column="type" property="type" jdbcType="INTEGER" />
+    <result column="memo" property="memo" jdbcType="VARCHAR" />
+    <result column="currentnum" property="currentnum" jdbcType="REAL" />
+    <result column="deductednum" property="deductednum" jdbcType="REAL" />
+    <result column="topnum" property="topnum" jdbcType="REAL" />
+    <result column="nextdaytopnum" property="nextdaytopnum" jdbcType="REAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    type, memo, currentnum, deductednum, topnum, nextdaytopnum
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sql.bean.TWimipayCodeLimitInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_wimipay_code_limit_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_wimipay_code_limit_info
+    where type = #{type,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_wimipay_code_limit_info
+    where type = #{type,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sql.bean.TWimipayCodeLimitInfoExample" >
+    delete from t_wimipay_code_limit_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sql.bean.TWimipayCodeLimitInfo" >
+    insert into t_wimipay_code_limit_info (type, memo, currentnum, 
+      deductednum, topnum, nextdaytopnum
+      )
+    values (#{type,jdbcType=INTEGER}, #{memo,jdbcType=VARCHAR}, #{currentnum,jdbcType=REAL}, 
+      #{deductednum,jdbcType=REAL}, #{topnum,jdbcType=REAL}, #{nextdaytopnum,jdbcType=REAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sql.bean.TWimipayCodeLimitInfo" >
+    insert into t_wimipay_code_limit_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="memo != null" >
+        memo,
+      </if>
+      <if test="currentnum != null" >
+        currentnum,
+      </if>
+      <if test="deductednum != null" >
+        deductednum,
+      </if>
+      <if test="topnum != null" >
+        topnum,
+      </if>
+      <if test="nextdaytopnum != null" >
+        nextdaytopnum,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="memo != null" >
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="currentnum != null" >
+        #{currentnum,jdbcType=REAL},
+      </if>
+      <if test="deductednum != null" >
+        #{deductednum,jdbcType=REAL},
+      </if>
+      <if test="topnum != null" >
+        #{topnum,jdbcType=REAL},
+      </if>
+      <if test="nextdaytopnum != null" >
+        #{nextdaytopnum,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sql.bean.TWimipayCodeLimitInfoExample" resultType="java.lang.Integer" >
+    select count(*) from t_wimipay_code_limit_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_wimipay_code_limit_info
+    <set >
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.memo != null" >
+        memo = #{record.memo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.currentnum != null" >
+        currentnum = #{record.currentnum,jdbcType=REAL},
+      </if>
+      <if test="record.deductednum != null" >
+        deductednum = #{record.deductednum,jdbcType=REAL},
+      </if>
+      <if test="record.topnum != null" >
+        topnum = #{record.topnum,jdbcType=REAL},
+      </if>
+      <if test="record.nextdaytopnum != null" >
+        nextdaytopnum = #{record.nextdaytopnum,jdbcType=REAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_wimipay_code_limit_info
+    set type = #{record.type,jdbcType=INTEGER},
+      memo = #{record.memo,jdbcType=VARCHAR},
+      currentnum = #{record.currentnum,jdbcType=REAL},
+      deductednum = #{record.deductednum,jdbcType=REAL},
+      topnum = #{record.topnum,jdbcType=REAL},
+      nextdaytopnum = #{record.nextdaytopnum,jdbcType=REAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sql.bean.TWimipayCodeLimitInfo" >
+    update t_wimipay_code_limit_info
+    <set >
+      <if test="memo != null" >
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="currentnum != null" >
+        currentnum = #{currentnum,jdbcType=REAL},
+      </if>
+      <if test="deductednum != null" >
+        deductednum = #{deductednum,jdbcType=REAL},
+      </if>
+      <if test="topnum != null" >
+        topnum = #{topnum,jdbcType=REAL},
+      </if>
+      <if test="nextdaytopnum != null" >
+        nextdaytopnum = #{nextdaytopnum,jdbcType=REAL},
+      </if>
+    </set>
+    where type = #{type,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sql.bean.TWimipayCodeLimitInfo" >
+    update t_wimipay_code_limit_info
+    set memo = #{memo,jdbcType=VARCHAR},
+      currentnum = #{currentnum,jdbcType=REAL},
+      deductednum = #{deductednum,jdbcType=REAL},
+      topnum = #{topnum,jdbcType=REAL},
+      nextdaytopnum = #{nextdaytopnum,jdbcType=REAL}
+    where type = #{type,jdbcType=INTEGER}
+  </update>
+</mapper>

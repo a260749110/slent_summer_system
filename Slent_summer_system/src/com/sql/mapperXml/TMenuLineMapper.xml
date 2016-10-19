@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sql.mapper.TMenuLineMapper" >
+  <resultMap id="BaseResultMap" type="com.sql.mapperBean.TMenuLine" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="n_price" property="nPrice" jdbcType="REAL" />
+    <result column="price_vip" property="priceVip" jdbcType="REAL" />
+    <result column="can_off" property="canOff" jdbcType="BIT" />
+    <result column="n_group_id" property="nGroupId" jdbcType="INTEGER" />
+    <result column="enable" property="enable" jdbcType="BIT" />
+    <result column="is_combo" property="isCombo" jdbcType="BIT" />
+    <result column="n_name" property="nName" jdbcType="VARCHAR" />
+    <result column="bar_code" property="barCode" jdbcType="VARCHAR" />
+    <result column="n_unit" property="nUnit" jdbcType="VARCHAR" />
+    <result column="other_choice" property="otherChoice" jdbcType="VARCHAR" />
+    <result column="include_id" property="includeId" jdbcType="VARCHAR" />
+    <result column="ticket_flag" property="ticketFlag" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, n_price, price_vip, can_off, n_group_id, enable, is_combo, n_name, bar_code, 
+    n_unit, other_choice, include_id, ticket_flag
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sql.mapperBean.TMenuLineExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_menu_line
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_menu_line
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_menu_line
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sql.mapperBean.TMenuLineExample" >
+    delete from t_menu_line
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sql.mapperBean.TMenuLine" >
+    insert into t_menu_line (id, n_price, price_vip, 
+      can_off, n_group_id, enable, is_combo, 
+      n_name, bar_code, n_unit, 
+      other_choice, include_id, ticket_flag
+      )
+    values (#{id,jdbcType=INTEGER}, #{nPrice,jdbcType=REAL}, #{priceVip,jdbcType=REAL}, 
+      #{canOff,jdbcType=BIT}, #{nGroupId,jdbcType=INTEGER}, #{enable,jdbcType=BIT}, #{isCombo,jdbcType=BIT}, 
+      #{nName,jdbcType=VARCHAR}, #{barCode,jdbcType=VARCHAR}, #{nUnit,jdbcType=VARCHAR}, 
+      #{otherChoice,jdbcType=VARCHAR}, #{includeId,jdbcType=VARCHAR}, #{ticketFlag,jdbcType=BIT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sql.mapperBean.TMenuLine" >
+    insert into t_menu_line
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="nPrice != null" >
+        n_price,
+      </if>
+      <if test="priceVip != null" >
+        price_vip,
+      </if>
+      <if test="canOff != null" >
+        can_off,
+      </if>
+      <if test="nGroupId != null" >
+        n_group_id,
+      </if>
+      <if test="enable != null" >
+        enable,
+      </if>
+      <if test="isCombo != null" >
+        is_combo,
+      </if>
+      <if test="nName != null" >
+        n_name,
+      </if>
+      <if test="barCode != null" >
+        bar_code,
+      </if>
+      <if test="nUnit != null" >
+        n_unit,
+      </if>
+      <if test="otherChoice != null" >
+        other_choice,
+      </if>
+      <if test="includeId != null" >
+        include_id,
+      </if>
+      <if test="ticketFlag != null" >
+        ticket_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="nPrice != null" >
+        #{nPrice,jdbcType=REAL},
+      </if>
+      <if test="priceVip != null" >
+        #{priceVip,jdbcType=REAL},
+      </if>
+      <if test="canOff != null" >
+        #{canOff,jdbcType=BIT},
+      </if>
+      <if test="nGroupId != null" >
+        #{nGroupId,jdbcType=INTEGER},
+      </if>
+      <if test="enable != null" >
+        #{enable,jdbcType=BIT},
+      </if>
+      <if test="isCombo != null" >
+        #{isCombo,jdbcType=BIT},
+      </if>
+      <if test="nName != null" >
+        #{nName,jdbcType=VARCHAR},
+      </if>
+      <if test="barCode != null" >
+        #{barCode,jdbcType=VARCHAR},
+      </if>
+      <if test="nUnit != null" >
+        #{nUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="otherChoice != null" >
+        #{otherChoice,jdbcType=VARCHAR},
+      </if>
+      <if test="includeId != null" >
+        #{includeId,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketFlag != null" >
+        #{ticketFlag,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sql.mapperBean.TMenuLineExample" resultType="java.lang.Integer" >
+    select count(*) from t_menu_line
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_menu_line
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.nPrice != null" >
+        n_price = #{record.nPrice,jdbcType=REAL},
+      </if>
+      <if test="record.priceVip != null" >
+        price_vip = #{record.priceVip,jdbcType=REAL},
+      </if>
+      <if test="record.canOff != null" >
+        can_off = #{record.canOff,jdbcType=BIT},
+      </if>
+      <if test="record.nGroupId != null" >
+        n_group_id = #{record.nGroupId,jdbcType=INTEGER},
+      </if>
+      <if test="record.enable != null" >
+        enable = #{record.enable,jdbcType=BIT},
+      </if>
+      <if test="record.isCombo != null" >
+        is_combo = #{record.isCombo,jdbcType=BIT},
+      </if>
+      <if test="record.nName != null" >
+        n_name = #{record.nName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.barCode != null" >
+        bar_code = #{record.barCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nUnit != null" >
+        n_unit = #{record.nUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.otherChoice != null" >
+        other_choice = #{record.otherChoice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.includeId != null" >
+        include_id = #{record.includeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ticketFlag != null" >
+        ticket_flag = #{record.ticketFlag,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_menu_line
+    set id = #{record.id,jdbcType=INTEGER},
+      n_price = #{record.nPrice,jdbcType=REAL},
+      price_vip = #{record.priceVip,jdbcType=REAL},
+      can_off = #{record.canOff,jdbcType=BIT},
+      n_group_id = #{record.nGroupId,jdbcType=INTEGER},
+      enable = #{record.enable,jdbcType=BIT},
+      is_combo = #{record.isCombo,jdbcType=BIT},
+      n_name = #{record.nName,jdbcType=VARCHAR},
+      bar_code = #{record.barCode,jdbcType=VARCHAR},
+      n_unit = #{record.nUnit,jdbcType=VARCHAR},
+      other_choice = #{record.otherChoice,jdbcType=VARCHAR},
+      include_id = #{record.includeId,jdbcType=VARCHAR},
+      ticket_flag = #{record.ticketFlag,jdbcType=BIT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sql.mapperBean.TMenuLine" >
+    update t_menu_line
+    <set >
+      <if test="nPrice != null" >
+        n_price = #{nPrice,jdbcType=REAL},
+      </if>
+      <if test="priceVip != null" >
+        price_vip = #{priceVip,jdbcType=REAL},
+      </if>
+      <if test="canOff != null" >
+        can_off = #{canOff,jdbcType=BIT},
+      </if>
+      <if test="nGroupId != null" >
+        n_group_id = #{nGroupId,jdbcType=INTEGER},
+      </if>
+      <if test="enable != null" >
+        enable = #{enable,jdbcType=BIT},
+      </if>
+      <if test="isCombo != null" >
+        is_combo = #{isCombo,jdbcType=BIT},
+      </if>
+      <if test="nName != null" >
+        n_name = #{nName,jdbcType=VARCHAR},
+      </if>
+      <if test="barCode != null" >
+        bar_code = #{barCode,jdbcType=VARCHAR},
+      </if>
+      <if test="nUnit != null" >
+        n_unit = #{nUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="otherChoice != null" >
+        other_choice = #{otherChoice,jdbcType=VARCHAR},
+      </if>
+      <if test="includeId != null" >
+        include_id = #{includeId,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketFlag != null" >
+        ticket_flag = #{ticketFlag,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sql.mapperBean.TMenuLine" >
+    update t_menu_line
+    set n_price = #{nPrice,jdbcType=REAL},
+      price_vip = #{priceVip,jdbcType=REAL},
+      can_off = #{canOff,jdbcType=BIT},
+      n_group_id = #{nGroupId,jdbcType=INTEGER},
+      enable = #{enable,jdbcType=BIT},
+      is_combo = #{isCombo,jdbcType=BIT},
+      n_name = #{nName,jdbcType=VARCHAR},
+      bar_code = #{barCode,jdbcType=VARCHAR},
+      n_unit = #{nUnit,jdbcType=VARCHAR},
+      other_choice = #{otherChoice,jdbcType=VARCHAR},
+      include_id = #{includeId,jdbcType=VARCHAR},
+      ticket_flag = #{ticketFlag,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

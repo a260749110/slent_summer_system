@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sql.mapper.TMonegChangeMapper" >
+  <resultMap id="BaseResultMap" type="com.sql.mapperBean.TMonegChange" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="money_init" property="moneyInit" jdbcType="REAL" />
+    <result column="money_change" property="moneyChange" jdbcType="REAL" />
+    <result column="money_change_type" property="moneyChangeType" jdbcType="INTEGER" />
+    <result column="money_finish" property="moneyFinish" jdbcType="REAL" />
+    <result column="money_change_type_name" property="moneyChangeTypeName" jdbcType="VARCHAR" />
+    <result column="change_user" property="changeUser" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="changr_flight" property="changrFlight" jdbcType="DATE" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.sql.mapperBean.TMonegChange" extends="BaseResultMap" >
+    <result column="tip" property="tip" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, money_init, money_change, money_change_type, money_finish, money_change_type_name, 
+    change_user, time, changr_flight
+  </sql>
+  <sql id="Blob_Column_List" >
+    tip
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.sql.mapperBean.TMonegChangeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_moneg_change
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sql.mapperBean.TMonegChangeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_moneg_change
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_moneg_change
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+    <select id="selectByLast" resultMap="ResultMapWithBLOBs"  >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_moneg_change
+    where id =((select max(id) from t_moneg_change) )
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_moneg_change
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sql.mapperBean.TMonegChangeExample" >
+    delete from t_moneg_change
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sql.mapperBean.TMonegChange" >
+    insert into t_moneg_change (id, money_init, money_change, 
+      money_change_type, money_finish, money_change_type_name, 
+      change_user, time, changr_flight, 
+      tip)
+    values (#{id,jdbcType=INTEGER}, #{moneyInit,jdbcType=REAL}, #{moneyChange,jdbcType=REAL}, 
+      #{moneyChangeType,jdbcType=INTEGER}, #{moneyFinish,jdbcType=REAL}, #{moneyChangeTypeName,jdbcType=VARCHAR}, 
+      #{changeUser,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, #{changrFlight,jdbcType=DATE}, 
+      #{tip,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sql.mapperBean.TMonegChange" >
+    insert into t_moneg_change
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="moneyInit != null" >
+        money_init,
+      </if>
+      <if test="moneyChange != null" >
+        money_change,
+      </if>
+      <if test="moneyChangeType != null" >
+        money_change_type,
+      </if>
+      <if test="moneyFinish != null" >
+        money_finish,
+      </if>
+      <if test="moneyChangeTypeName != null" >
+        money_change_type_name,
+      </if>
+      <if test="changeUser != null" >
+        change_user,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="changrFlight != null" >
+        changr_flight,
+      </if>
+      <if test="tip != null" >
+        tip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="moneyInit != null" >
+        #{moneyInit,jdbcType=REAL},
+      </if>
+      <if test="moneyChange != null" >
+        #{moneyChange,jdbcType=REAL},
+      </if>
+      <if test="moneyChangeType != null" >
+        #{moneyChangeType,jdbcType=INTEGER},
+      </if>
+      <if test="moneyFinish != null" >
+        #{moneyFinish,jdbcType=REAL},
+      </if>
+      <if test="moneyChangeTypeName != null" >
+        #{moneyChangeTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="changeUser != null" >
+        #{changeUser,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="changrFlight != null" >
+        #{changrFlight,jdbcType=DATE},
+      </if>
+      <if test="tip != null" >
+        #{tip,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sql.mapperBean.TMonegChangeExample" resultType="java.lang.Integer" >
+    select count(*) from t_moneg_change
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_moneg_change
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.moneyInit != null" >
+        money_init = #{record.moneyInit,jdbcType=REAL},
+      </if>
+      <if test="record.moneyChange != null" >
+        money_change = #{record.moneyChange,jdbcType=REAL},
+      </if>
+      <if test="record.moneyChangeType != null" >
+        money_change_type = #{record.moneyChangeType,jdbcType=INTEGER},
+      </if>
+      <if test="record.moneyFinish != null" >
+        money_finish = #{record.moneyFinish,jdbcType=REAL},
+      </if>
+      <if test="record.moneyChangeTypeName != null" >
+        money_change_type_name = #{record.moneyChangeTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.changeUser != null" >
+        change_user = #{record.changeUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.time != null" >
+        time = #{record.time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.changrFlight != null" >
+        changr_flight = #{record.changrFlight,jdbcType=DATE},
+      </if>
+      <if test="record.tip != null" >
+        tip = #{record.tip,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update t_moneg_change
+    set id = #{record.id,jdbcType=INTEGER},
+      money_init = #{record.moneyInit,jdbcType=REAL},
+      money_change = #{record.moneyChange,jdbcType=REAL},
+      money_change_type = #{record.moneyChangeType,jdbcType=INTEGER},
+      money_finish = #{record.moneyFinish,jdbcType=REAL},
+      money_change_type_name = #{record.moneyChangeTypeName,jdbcType=VARCHAR},
+      change_user = #{record.changeUser,jdbcType=VARCHAR},
+      time = #{record.time,jdbcType=TIMESTAMP},
+      changr_flight = #{record.changrFlight,jdbcType=DATE},
+      tip = #{record.tip,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_moneg_change
+    set id = #{record.id,jdbcType=INTEGER},
+      money_init = #{record.moneyInit,jdbcType=REAL},
+      money_change = #{record.moneyChange,jdbcType=REAL},
+      money_change_type = #{record.moneyChangeType,jdbcType=INTEGER},
+      money_finish = #{record.moneyFinish,jdbcType=REAL},
+      money_change_type_name = #{record.moneyChangeTypeName,jdbcType=VARCHAR},
+      change_user = #{record.changeUser,jdbcType=VARCHAR},
+      time = #{record.time,jdbcType=TIMESTAMP},
+      changr_flight = #{record.changrFlight,jdbcType=DATE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sql.mapperBean.TMonegChange" >
+    update t_moneg_change
+    <set >
+      <if test="moneyInit != null" >
+        money_init = #{moneyInit,jdbcType=REAL},
+      </if>
+      <if test="moneyChange != null" >
+        money_change = #{moneyChange,jdbcType=REAL},
+      </if>
+      <if test="moneyChangeType != null" >
+        money_change_type = #{moneyChangeType,jdbcType=INTEGER},
+      </if>
+      <if test="moneyFinish != null" >
+        money_finish = #{moneyFinish,jdbcType=REAL},
+      </if>
+      <if test="moneyChangeTypeName != null" >
+        money_change_type_name = #{moneyChangeTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="changeUser != null" >
+        change_user = #{changeUser,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="changrFlight != null" >
+        changr_flight = #{changrFlight,jdbcType=DATE},
+      </if>
+      <if test="tip != null" >
+        tip = #{tip,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.sql.mapperBean.TMonegChange" >
+    update t_moneg_change
+    set money_init = #{moneyInit,jdbcType=REAL},
+      money_change = #{moneyChange,jdbcType=REAL},
+      money_change_type = #{moneyChangeType,jdbcType=INTEGER},
+      money_finish = #{moneyFinish,jdbcType=REAL},
+      money_change_type_name = #{moneyChangeTypeName,jdbcType=VARCHAR},
+      change_user = #{changeUser,jdbcType=VARCHAR},
+      time = #{time,jdbcType=TIMESTAMP},
+      changr_flight = #{changrFlight,jdbcType=DATE},
+      tip = #{tip,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sql.mapperBean.TMonegChange" >
+    update t_moneg_change
+    set money_init = #{moneyInit,jdbcType=REAL},
+      money_change = #{moneyChange,jdbcType=REAL},
+      money_change_type = #{moneyChangeType,jdbcType=INTEGER},
+      money_finish = #{moneyFinish,jdbcType=REAL},
+      money_change_type_name = #{moneyChangeTypeName,jdbcType=VARCHAR},
+      change_user = #{changeUser,jdbcType=VARCHAR},
+      time = #{time,jdbcType=TIMESTAMP},
+      changr_flight = #{changrFlight,jdbcType=DATE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

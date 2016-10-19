@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sql.mapper.TOgBiJspPageInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.sql.bean.TOgBiJspPageInfo" >
+    <id column="pange_uri" property="pangeUri" jdbcType="VARCHAR" />
+    <result column="persissions" property="persissions" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.sql.bean.TOgBiJspPageInfoWithBLOBs" extends="BaseResultMap" >
+    <result column="config" property="config" jdbcType="LONGVARCHAR" />
+    <result column="tip" property="tip" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    pange_uri, persissions
+  </sql>
+  <sql id="Blob_Column_List" >
+    config, tip
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.sql.bean.TOgBiJspPageInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_og_bi_jsp_page_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sql.bean.TOgBiJspPageInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_og_bi_jsp_page_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_og_bi_jsp_page_info
+    where pange_uri = #{pangeUri,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_og_bi_jsp_page_info
+    where pange_uri = #{pangeUri,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sql.bean.TOgBiJspPageInfoExample" >
+    delete from t_og_bi_jsp_page_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sql.bean.TOgBiJspPageInfoWithBLOBs" >
+    insert into t_og_bi_jsp_page_info (pange_uri, persissions, config, 
+      tip)
+    values (#{pangeUri,jdbcType=VARCHAR}, #{persissions,jdbcType=VARCHAR}, #{config,jdbcType=LONGVARCHAR}, 
+      #{tip,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sql.bean.TOgBiJspPageInfoWithBLOBs" >
+    insert into t_og_bi_jsp_page_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pangeUri != null" >
+        pange_uri,
+      </if>
+      <if test="persissions != null" >
+        persissions,
+      </if>
+      <if test="config != null" >
+        config,
+      </if>
+      <if test="tip != null" >
+        tip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pangeUri != null" >
+        #{pangeUri,jdbcType=VARCHAR},
+      </if>
+      <if test="persissions != null" >
+        #{persissions,jdbcType=VARCHAR},
+      </if>
+      <if test="config != null" >
+        #{config,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="tip != null" >
+        #{tip,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sql.bean.TOgBiJspPageInfoExample" resultType="java.lang.Integer" >
+    select count(*) from t_og_bi_jsp_page_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_og_bi_jsp_page_info
+    <set >
+      <if test="record.pangeUri != null" >
+        pange_uri = #{record.pangeUri,jdbcType=VARCHAR},
+      </if>
+      <if test="record.persissions != null" >
+        persissions = #{record.persissions,jdbcType=VARCHAR},
+      </if>
+      <if test="record.config != null" >
+        config = #{record.config,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.tip != null" >
+        tip = #{record.tip,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update t_og_bi_jsp_page_info
+    set pange_uri = #{record.pangeUri,jdbcType=VARCHAR},
+      persissions = #{record.persissions,jdbcType=VARCHAR},
+      config = #{record.config,jdbcType=LONGVARCHAR},
+      tip = #{record.tip,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_og_bi_jsp_page_info
+    set pange_uri = #{record.pangeUri,jdbcType=VARCHAR},
+      persissions = #{record.persissions,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sql.bean.TOgBiJspPageInfoWithBLOBs" >
+    update t_og_bi_jsp_page_info
+    <set >
+      <if test="persissions != null" >
+        persissions = #{persissions,jdbcType=VARCHAR},
+      </if>
+      <if test="config != null" >
+        config = #{config,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="tip != null" >
+        tip = #{tip,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where pange_uri = #{pangeUri,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.sql.bean.TOgBiJspPageInfoWithBLOBs" >
+    update t_og_bi_jsp_page_info
+    set persissions = #{persissions,jdbcType=VARCHAR},
+      config = #{config,jdbcType=LONGVARCHAR},
+      tip = #{tip,jdbcType=LONGVARCHAR}
+    where pange_uri = #{pangeUri,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sql.bean.TOgBiJspPageInfo" >
+    update t_og_bi_jsp_page_info
+    set persissions = #{persissions,jdbcType=VARCHAR}
+    where pange_uri = #{pangeUri,jdbcType=VARCHAR}
+  </update>
+</mapper>

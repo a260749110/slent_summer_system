@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<!-- 配置数据库连接信息 -->
+			<dataSource type="POOLED">
+				<property name="driver" value="com.mysql.jdbc.Driver" />
+				<property name="url" value="jdbc:mysql://localhost:3306/silent_summer" />
+				<property name="username" value="root" />
+				<property name="password" value="3272593" />
+			</dataSource>
+		</environment>
+	</environments>
+	<mappers>
+
+		<mapper resource="com/sql/mapperXml/TNoahTitlesMapper.xml" />
+		 <mapper resource="com/sql/mapperXml/TMenuLineMapper.xml"/>
+		 <mapper resource="com/sql/mapperXml/TMenuGroupMapper.xml"/>
+
+		<mapper resource="com/sql/mapperXml/TMenuChoiceMapper.xml" />
+			<mapper resource="com/sql/mapperXml/TMenuPaymentInfoMapper.xml" />
+			<mapper resource="com/sql/mapperXml/TSilemtSummerSellInfoMapper.xml" />
+				<mapper resource="com/sql/mapperXml/TSilemtSummerSellInfoMapper.xml" />
+			<mapper resource="com/sql/mapperXml/TOgBiJspPageInfoMapper.xml" />
+		
+					<mapper resource="com/sql/mapperXml/TOgBiPermissionsMapper.xml" />
+						<mapper resource="com/sql/mapperXml/TLandInfoMapper.xml" />
+							<mapper resource="com/sql/mapperXml/TLandIdMapper.xml" />
+									<mapper resource="com/sql/mapperXml/TUserMapper.xml" />
+									<mapper resource="com/sql/mapperXml/SVipMapper.xml" />
+									
+	<mapper resource="com/sql/mapperXml/TMonegChangeMapper.xml" />
+	<mapper resource="com/sql/mapperXml/TMoneyChangeTypeMapper.xml" />
+		
+	</mappers>
+</configuration>

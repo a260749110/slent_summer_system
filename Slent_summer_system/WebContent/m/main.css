@@ -1,0 +1,125 @@
+@CHARSET "UTF-8";
+body{ margin:0px;}
+.bg{background-color:#CCC;}
+.clear{clear:both;}
+#wrap {  
+	width:100%; 
+	height:700px;
+	margin:0 auto;
+	overflow:hidden; 
+}
+#left, #center, #right {
+	height:100%;
+	margin:auto 0px;
+}
+#left {
+	background:#66CCCC;
+	float:left; 
+	width:35%;
+	overflow:auto;          
+}
+#center { 
+	background:#FF6666; 
+	float:left; 
+	width:30%;
+	overflow:auto;         
+}
+#right { 
+	
+	float:left; 
+	width:35%;
+	        
+}
+#rignt_top
+{
+	height:70%;
+	width:100%;
+	background:#99CC00;
+	float:left; 
+	overflow:auto; 
+	}
+.rignt_top
+{
+	height:70%;
+	width:100%;
+	background:#99CC00;
+	float:left; 
+	overflow:auto; 
+	}
+.rignt_btm
+{
+	padding:8px;
+	height: 20%;
+	width: 100%;
+	float: left;
+	overflow: auto;
+	background-color: #FF9900;
+	}
+#rignt_btm
+{
+	padding:8px;
+	height: 20%;
+	width: 100%;
+	float: left;
+	overflow: auto;
+	background-color: #FF9900;
+	}
+.rignt_btm_btm
+{
+	height: 10%;
+	width: 100%;
+	float: left;
+	
+	background-color: #FF9900;
+	}
+#rignt_btm_btm
+{
+	height: 10%;
+	width: 100%;
+	float: left;
+	
+	background-color: #FF9900;
+	}
+
+#payItem
+{}
+#footItem
+{}
+input{width:130px; height:30px; margin:2px 0px;}
+.title{font-size:18px;}
+.btnAdd ,.btnRemove{float:right;}
+.button1{ width:110px; height:40px; margin:8px 4px;}
+.button2{ width:140px; height:50px; margin:8px 4px;}
+.button3{ width:120px; height:40px; margin:8px 4px 8px 14px;}
+.button_choice{width:70px; height:24px; margin:4px 1px;color:#fff;}
+.button_btm{ width:70px; height:30px; margin:0px 0px 0px 0px;}
+.button_btm_btm{ width:100px; height:30px; margin:0px 0px 0px 0px;}
+.pay{ width:100%; margin:14px 0;}
+.slelce_name
+{
+	float:left;
+	text-align:left;
+	width: 40%;
+	white-space:nowrap; 
+	font-size: 12px;
+	padding:4px;
+}
+ol{
+	padding: 10px;
+	font-size:14px; 
+}
+li{	list-style:none;
+	float:left;
+	width:97%;
+}
+.foot{
+	padding: 4px;
+	background-color: #CCC;
+	margin-top: 10px;
+	padding-bottom: 0px;
+}
+.item{
+	background-color:#F60;
+	white-space:nowrap; 
+	padding:5px;}
+.time{ width:240px; height:40px; margin:8px 14px; float:right; text-align:center; background-color:#FFF; line-height:40px;}

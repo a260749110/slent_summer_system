@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sql.mapper.TLandIdMapper" >
+  <resultMap id="BaseResultMap" type="com.sql.mapperBean.TLandId" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="land_id" property="landId" jdbcType="INTEGER" />
+    <result column="land_time" property="landTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="flight" property="flight" jdbcType="DATE" />
+    <result column="is_close" property="isClose" jdbcType="BIT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.sql.mapperBean.TLandId" extends="BaseResultMap" >
+    <result column="land_info" property="landInfo" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, land_id, land_time, end_time, flight, is_close
+  </sql>
+  <sql id="Blob_Column_List" >
+    land_info
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.sql.mapperBean.TLandIdExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_land_id
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sql.mapperBean.TLandIdExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_land_id
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_land_id
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+   <select id="selectMax" resultMap="ResultMapWithBLOBs" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_land_id
+    where id =(select max(id) from t_land_id)
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_land_id
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sql.mapperBean.TLandIdExample" >
+    delete from t_land_id
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sql.mapperBean.TLandId" >
+    insert into t_land_id (id, land_id, land_time, 
+      end_time, flight, is_close, 
+      land_info)
+    values (#{id,jdbcType=INTEGER}, #{landId,jdbcType=INTEGER}, #{landTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=TIMESTAMP}, #{flight,jdbcType=DATE}, #{isClose,jdbcType=BIT}, 
+      #{landInfo,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sql.mapperBean.TLandId" >
+    insert into t_land_id
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="landId != null" >
+        land_id,
+      </if>
+      <if test="landTime != null" >
+        land_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="flight != null" >
+        flight,
+      </if>
+      <if test="isClose != null" >
+        is_close,
+      </if>
+      <if test="landInfo != null" >
+        land_info,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="landId != null" >
+        #{landId,jdbcType=INTEGER},
+      </if>
+      <if test="landTime != null" >
+        #{landTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flight != null" >
+        #{flight,jdbcType=DATE},
+      </if>
+      <if test="isClose != null" >
+        #{isClose,jdbcType=BIT},
+      </if>
+      <if test="landInfo != null" >
+        #{landInfo,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sql.mapperBean.TLandIdExample" resultType="java.lang.Integer" >
+    select count(*) from t_land_id
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_land_id
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.landId != null" >
+        land_id = #{record.landId,jdbcType=INTEGER},
+      </if>
+      <if test="record.landTime != null" >
+        land_time = #{record.landTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endTime != null" >
+        end_time = #{record.endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.flight != null" >
+        flight = #{record.flight,jdbcType=DATE},
+      </if>
+      <if test="record.isClose != null" >
+        is_close = #{record.isClose,jdbcType=BIT},
+      </if>
+      <if test="record.landInfo != null" >
+        land_info = #{record.landInfo,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update t_land_id
+    set id = #{record.id,jdbcType=INTEGER},
+      land_id = #{record.landId,jdbcType=INTEGER},
+      land_time = #{record.landTime,jdbcType=TIMESTAMP},
+      end_time = #{record.endTime,jdbcType=TIMESTAMP},
+      flight = #{record.flight,jdbcType=DATE},
+      is_close = #{record.isClose,jdbcType=BIT},
+      land_info = #{record.landInfo,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_land_id
+    set id = #{record.id,jdbcType=INTEGER},
+      land_id = #{record.landId,jdbcType=INTEGER},
+      land_time = #{record.landTime,jdbcType=TIMESTAMP},
+      end_time = #{record.endTime,jdbcType=TIMESTAMP},
+      flight = #{record.flight,jdbcType=DATE},
+      is_close = #{record.isClose,jdbcType=BIT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sql.mapperBean.TLandId" >
+    update t_land_id
+    <set >
+      <if test="landId != null" >
+        land_id = #{landId,jdbcType=INTEGER},
+      </if>
+      <if test="landTime != null" >
+        land_time = #{landTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flight != null" >
+        flight = #{flight,jdbcType=DATE},
+      </if>
+      <if test="isClose != null" >
+        is_close = #{isClose,jdbcType=BIT},
+      </if>
+      <if test="landInfo != null" >
+        land_info = #{landInfo,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.sql.mapperBean.TLandId" >
+    update t_land_id
+    set land_id = #{landId,jdbcType=INTEGER},
+      land_time = #{landTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      flight = #{flight,jdbcType=DATE},
+      is_close = #{isClose,jdbcType=BIT},
+      land_info = #{landInfo,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sql.mapperBean.TLandId" >
+    update t_land_id
+    set land_id = #{landId,jdbcType=INTEGER},
+      land_time = #{landTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      flight = #{flight,jdbcType=DATE},
+      is_close = #{isClose,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

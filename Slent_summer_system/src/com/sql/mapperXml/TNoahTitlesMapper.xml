@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sql.mapper.TNoahTitlesMapper" >
+  <resultMap id="BaseResultMap" type="com.sql.mapperXml.TNoahTitlesKey" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <id column="n_index" property="nIndex" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.sql.mapperXml.TNoahTitlesWithBLOBs" extends="BaseResultMap" >
+    <result column="n_value" property="nValue" jdbcType="LONGVARCHAR" />
+    <result column="n_tip" property="nTip" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, n_index
+  </sql>
+  <sql id="Blob_Column_List" >
+    n_value, n_tip
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.sql.mapperXml.TNoahTitlesExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_noah_titles
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sql.mapperXml.TNoahTitlesExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_noah_titles
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="com.sql.mapperXml.TNoahTitlesKey" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_noah_titles
+    where id = #{id,jdbcType=INTEGER}
+      and n_index = #{nIndex,jdbcType=LONGVARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.sql.mapperXml.TNoahTitlesKey" >
+    delete from t_noah_titles
+    where id = #{id,jdbcType=INTEGER}
+      and n_index = #{nIndex,jdbcType=LONGVARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sql.mapperXml.TNoahTitlesWithBLOBs" >
+    insert into t_noah_titles (id, n_index, n_value, 
+      n_tip)
+    values (#{id,jdbcType=INTEGER}, #{nIndex,jdbcType=LONGVARCHAR}, #{nValue,jdbcType=LONGVARCHAR}, 
+      #{nTip,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sql.mapperXml.TNoahTitlesWithBLOBs" >
+    insert into t_noah_titles
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="nIndex != null" >
+        n_index,
+      </if>
+      <if test="nValue != null" >
+        n_value,
+      </if>
+      <if test="nTip != null" >
+        n_tip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="nIndex != null" >
+        #{nIndex,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="nValue != null" >
+        #{nValue,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="nTip != null" >
+        #{nTip,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sql.mapperXml.TNoahTitlesExample" resultType="java.lang.Integer" >
+    select count(*) from t_noah_titles
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_noah_titles
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.nIndex != null" >
+        n_index = #{record.nIndex,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.nValue != null" >
+        n_value = #{record.nValue,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.nTip != null" >
+        n_tip = #{record.nTip,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update t_noah_titles
+    set id = #{record.id,jdbcType=INTEGER},
+      n_index = #{record.nIndex,jdbcType=LONGVARCHAR},
+      n_value = #{record.nValue,jdbcType=LONGVARCHAR},
+      n_tip = #{record.nTip,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_noah_titles
+    set id = #{record.id,jdbcType=INTEGER},
+      n_index = #{record.nIndex,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sql.mapperXml.TNoahTitlesWithBLOBs" >
+    update t_noah_titles
+    <set >
+      <if test="nValue != null" >
+        n_value = #{nValue,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="nTip != null" >
+        n_tip = #{nTip,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+      and n_index = #{nIndex,jdbcType=LONGVARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.sql.mapperXml.TNoahTitlesWithBLOBs" >
+    update t_noah_titles
+    set n_value = #{nValue,jdbcType=LONGVARCHAR},
+      n_tip = #{nTip,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+      and n_index = #{nIndex,jdbcType=LONGVARCHAR}
+  </update>
+</mapper>

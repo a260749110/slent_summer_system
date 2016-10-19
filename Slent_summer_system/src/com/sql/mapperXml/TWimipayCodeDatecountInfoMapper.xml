@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sql.mapper.TWimipayCodeDatecountInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.sql.bean.TWimipayCodeDatecountInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="prefix" property="prefix" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="datenum" property="datenum" jdbcType="REAL" />
+    <result column="deductednum" property="deductednum" jdbcType="REAL" />
+    <result column="_date" property="date" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, prefix, type, datenum, deductednum, _date
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sql.bean.TWimipayCodeDatecountInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_wimipay_cp_code_datecount_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_wimipay_cp_code_datecount_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_wimipay_cp_code_datecount_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sql.bean.TWimipayCodeDatecountInfoExample" >
+    delete from t_wimipay_cp_code_datecount_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sql.bean.TWimipayCodeDatecountInfo" >
+    insert into t_wimipay_cp_code_datecount_info (id, prefix, type, 
+      datenum, deductednum, _date)
+    values (#{id,jdbcType=INTEGER}, #{prefix,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
+      #{datenum,jdbcType=REAL}, #{deductednum,jdbcType=REAL}, #{date,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sql.bean.TWimipayCodeDatecountInfo" >
+    insert into t_wimipay_cp_code_datecount_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="prefix != null" >
+        prefix,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="datenum != null" >
+        datenum,
+      </if>
+      <if test="deductednum != null" >
+        deductednum,
+      </if>
+      <if test="date != null" >
+        _date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="prefix != null" >
+        #{prefix,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="datenum != null" >
+        #{datenum,jdbcType=REAL},
+      </if>
+      <if test="deductednum != null" >
+        #{deductednum,jdbcType=REAL},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sql.bean.TWimipayCodeDatecountInfoExample" resultType="java.lang.Integer" >
+    select count(*) from t_wimipay_cp_code_datecount_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  
+   <select id="selectByTable" resultMap="BaseResultMap" parameterType="com.sql.bean.TWimipayCodeDatecountInfo" >
+    select
+     <include refid="Base_Column_List" />
+    from ${tableName} 
+    where `type` = ${type}  
+     <if test="date != null" >
+    and `_date` = #{date,jdbcType=DATE}
+    </if>
+         <if test="type != null" >
+    and `type` = #{type,jdbcType=DATE}
+    </if>
+        <if test="dateStart != null" >
+    and   `_date` between #{dateStart,jdbcType=DATE} and #{dateEnd,jdbcType=DATE}
+    </if>
+  
+  </select>
+  
+   
+   
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_wimipay_cp_code_datecount_info
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.prefix != null" >
+        prefix = #{record.prefix,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.datenum != null" >
+        datenum = #{record.datenum,jdbcType=REAL},
+      </if>
+      <if test="record.deductednum != null" >
+        deductednum = #{record.deductednum,jdbcType=REAL},
+      </if>
+      <if test="record.date != null" >
+        _date = #{record.date,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_wimipay_cp_code_datecount_info
+    set id = #{record.id,jdbcType=INTEGER},
+      prefix = #{record.prefix,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=INTEGER},
+      datenum = #{record.datenum,jdbcType=REAL},
+      deductednum = #{record.deductednum,jdbcType=REAL},
+      _date = #{record.date,jdbcType=DATE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sql.bean.TWimipayCodeDatecountInfo" >
+    update t_wimipay_cp_code_datecount_info
+    <set >
+      <if test="prefix != null" >
+        prefix = #{prefix,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="datenum != null" >
+        datenum = #{datenum,jdbcType=REAL},
+      </if>
+      <if test="deductednum != null" >
+        deductednum = #{deductednum,jdbcType=REAL},
+      </if>
+      <if test="date != null" >
+        _date = #{date,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sql.bean.TWimipayCodeDatecountInfo" >
+    update t_wimipay_cp_code_datecount_info
+    set prefix = #{prefix,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      datenum = #{datenum,jdbcType=REAL},
+      deductednum = #{deductednum,jdbcType=REAL},
+      _date = #{date,jdbcType=DATE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sql.mapper.TLandInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.sql.mapperBean.TLandInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="land_id" property="landId" jdbcType="INTEGER" />
+    <result column="land_user" property="landUser" jdbcType="VARCHAR" />
+    <result column="land_time" property="landTime" jdbcType="TIMESTAMP" />
+    <result column="flight" property="flight" jdbcType="DATE" />
+    <result column="close" property="close" jdbcType="BIT" />
+    <result column="next_user" property="nextUser" jdbcType="VARCHAR" />
+    <result column="has_next" property="hasNext" jdbcType="BIT" />
+    <result column="money_in" property="moneyIn" jdbcType="REAL" />
+    <result column="money_true" property="moneyTrue" jdbcType="REAL" />
+    <result column="money_need" property="moneyNeed" jdbcType="REAL" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.sql.mapperBean.TLandInfoWithBLOBs" extends="BaseResultMap" >
+    <result column="land_users" property="landUsers" jdbcType="LONGVARCHAR" />
+    <result column="tip" property="tip" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, land_id, land_user, land_time, flight, close, next_user, has_next, money_in, 
+    money_true, money_need
+  </sql>
+  <sql id="Blob_Column_List" >
+    land_users, tip
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.sql.mapperBean.TLandInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_land_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sql.mapperBean.TLandInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_land_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_land_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_land_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sql.mapperBean.TLandInfoExample" >
+    delete from t_land_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sql.mapperBean.TLandInfoWithBLOBs" >
+    insert into t_land_info (id, land_id, land_user, 
+      land_time, flight, close, 
+      next_user, has_next, money_in, 
+      money_true, money_need, land_users, 
+      tip)
+    values (#{id,jdbcType=INTEGER}, #{landId,jdbcType=INTEGER}, #{landUser,jdbcType=VARCHAR}, 
+      #{landTime,jdbcType=TIMESTAMP}, #{flight,jdbcType=DATE}, #{close,jdbcType=BIT}, 
+      #{nextUser,jdbcType=VARCHAR}, #{hasNext,jdbcType=BIT}, #{moneyIn,jdbcType=REAL}, 
+      #{moneyTrue,jdbcType=REAL}, #{moneyNeed,jdbcType=REAL}, #{landUsers,jdbcType=LONGVARCHAR}, 
+      #{tip,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sql.mapperBean.TLandInfoWithBLOBs" >
+    insert into t_land_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="landId != null" >
+        land_id,
+      </if>
+      <if test="landUser != null" >
+        land_user,
+      </if>
+      <if test="landTime != null" >
+        land_time,
+      </if>
+      <if test="flight != null" >
+        flight,
+      </if>
+      <if test="close != null" >
+        close,
+      </if>
+      <if test="nextUser != null" >
+        next_user,
+      </if>
+      <if test="hasNext != null" >
+        has_next,
+      </if>
+      <if test="moneyIn != null" >
+        money_in,
+      </if>
+      <if test="moneyTrue != null" >
+        money_true,
+      </if>
+      <if test="moneyNeed != null" >
+        money_need,
+      </if>
+      <if test="landUsers != null" >
+        land_users,
+      </if>
+      <if test="tip != null" >
+        tip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="landId != null" >
+        #{landId,jdbcType=INTEGER},
+      </if>
+      <if test="landUser != null" >
+        #{landUser,jdbcType=VARCHAR},
+      </if>
+      <if test="landTime != null" >
+        #{landTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flight != null" >
+        #{flight,jdbcType=DATE},
+      </if>
+      <if test="close != null" >
+        #{close,jdbcType=BIT},
+      </if>
+      <if test="nextUser != null" >
+        #{nextUser,jdbcType=VARCHAR},
+      </if>
+      <if test="hasNext != null" >
+        #{hasNext,jdbcType=BIT},
+      </if>
+      <if test="moneyIn != null" >
+        #{moneyIn,jdbcType=REAL},
+      </if>
+      <if test="moneyTrue != null" >
+        #{moneyTrue,jdbcType=REAL},
+      </if>
+      <if test="moneyNeed != null" >
+        #{moneyNeed,jdbcType=REAL},
+      </if>
+      <if test="landUsers != null" >
+        #{landUsers,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="tip != null" >
+        #{tip,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sql.mapperBean.TLandInfoExample" resultType="java.lang.Integer" >
+    select count(*) from t_land_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_land_info
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.landId != null" >
+        land_id = #{record.landId,jdbcType=INTEGER},
+      </if>
+      <if test="record.landUser != null" >
+        land_user = #{record.landUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.landTime != null" >
+        land_time = #{record.landTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.flight != null" >
+        flight = #{record.flight,jdbcType=DATE},
+      </if>
+      <if test="record.close != null" >
+        close = #{record.close,jdbcType=BIT},
+      </if>
+      <if test="record.nextUser != null" >
+        next_user = #{record.nextUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hasNext != null" >
+        has_next = #{record.hasNext,jdbcType=BIT},
+      </if>
+      <if test="record.moneyIn != null" >
+        money_in = #{record.moneyIn,jdbcType=REAL},
+      </if>
+      <if test="record.moneyTrue != null" >
+        money_true = #{record.moneyTrue,jdbcType=REAL},
+      </if>
+      <if test="record.moneyNeed != null" >
+        money_need = #{record.moneyNeed,jdbcType=REAL},
+      </if>
+      <if test="record.landUsers != null" >
+        land_users = #{record.landUsers,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.tip != null" >
+        tip = #{record.tip,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update t_land_info
+    set id = #{record.id,jdbcType=INTEGER},
+      land_id = #{record.landId,jdbcType=INTEGER},
+      land_user = #{record.landUser,jdbcType=VARCHAR},
+      land_time = #{record.landTime,jdbcType=TIMESTAMP},
+      flight = #{record.flight,jdbcType=DATE},
+      close = #{record.close,jdbcType=BIT},
+      next_user = #{record.nextUser,jdbcType=VARCHAR},
+      has_next = #{record.hasNext,jdbcType=BIT},
+      money_in = #{record.moneyIn,jdbcType=REAL},
+      money_true = #{record.moneyTrue,jdbcType=REAL},
+      money_need = #{record.moneyNeed,jdbcType=REAL},
+      land_users = #{record.landUsers,jdbcType=LONGVARCHAR},
+      tip = #{record.tip,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_land_info
+    set id = #{record.id,jdbcType=INTEGER},
+      land_id = #{record.landId,jdbcType=INTEGER},
+      land_user = #{record.landUser,jdbcType=VARCHAR},
+      land_time = #{record.landTime,jdbcType=TIMESTAMP},
+      flight = #{record.flight,jdbcType=DATE},
+      close = #{record.close,jdbcType=BIT},
+      next_user = #{record.nextUser,jdbcType=VARCHAR},
+      has_next = #{record.hasNext,jdbcType=BIT},
+      money_in = #{record.moneyIn,jdbcType=REAL},
+      money_true = #{record.moneyTrue,jdbcType=REAL},
+      money_need = #{record.moneyNeed,jdbcType=REAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sql.mapperBean.TLandInfoWithBLOBs" >
+    update t_land_info
+    <set >
+      <if test="landId != null" >
+        land_id = #{landId,jdbcType=INTEGER},
+      </if>
+      <if test="landUser != null" >
+        land_user = #{landUser,jdbcType=VARCHAR},
+      </if>
+      <if test="landTime != null" >
+        land_time = #{landTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flight != null" >
+        flight = #{flight,jdbcType=DATE},
+      </if>
+      <if test="close != null" >
+        close = #{close,jdbcType=BIT},
+      </if>
+      <if test="nextUser != null" >
+        next_user = #{nextUser,jdbcType=VARCHAR},
+      </if>
+      <if test="hasNext != null" >
+        has_next = #{hasNext,jdbcType=BIT},
+      </if>
+      <if test="moneyIn != null" >
+        money_in = #{moneyIn,jdbcType=REAL},
+      </if>
+      <if test="moneyTrue != null" >
+        money_true = #{moneyTrue,jdbcType=REAL},
+      </if>
+      <if test="moneyNeed != null" >
+        money_need = #{moneyNeed,jdbcType=REAL},
+      </if>
+      <if test="landUsers != null" >
+        land_users = #{landUsers,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="tip != null" >
+        tip = #{tip,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.sql.mapperBean.TLandInfoWithBLOBs" >
+    update t_land_info
+    set land_id = #{landId,jdbcType=INTEGER},
+      land_user = #{landUser,jdbcType=VARCHAR},
+      land_time = #{landTime,jdbcType=TIMESTAMP},
+      flight = #{flight,jdbcType=DATE},
+      close = #{close,jdbcType=BIT},
+      next_user = #{nextUser,jdbcType=VARCHAR},
+      has_next = #{hasNext,jdbcType=BIT},
+      money_in = #{moneyIn,jdbcType=REAL},
+      money_true = #{moneyTrue,jdbcType=REAL},
+      money_need = #{moneyNeed,jdbcType=REAL},
+      land_users = #{landUsers,jdbcType=LONGVARCHAR},
+      tip = #{tip,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sql.mapperBean.TLandInfo" >
+    update t_land_info
+    set land_id = #{landId,jdbcType=INTEGER},
+      land_user = #{landUser,jdbcType=VARCHAR},
+      land_time = #{landTime,jdbcType=TIMESTAMP},
+      flight = #{flight,jdbcType=DATE},
+      close = #{close,jdbcType=BIT},
+      next_user = #{nextUser,jdbcType=VARCHAR},
+      has_next = #{hasNext,jdbcType=BIT},
+      money_in = #{moneyIn,jdbcType=REAL},
+      money_true = #{moneyTrue,jdbcType=REAL},
+      money_need = #{moneyNeed,jdbcType=REAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

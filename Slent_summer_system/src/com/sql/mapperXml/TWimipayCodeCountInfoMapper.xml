@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sql.mapper.TWimipayCodeCountInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.sql.bean.TWimipayCodeCountInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="prefix" property="prefix" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="currentnum" property="currentnum" jdbcType="REAL" />
+    <result column="deductednum" property="deductednum" jdbcType="REAL" />
+    <result column="topnum" property="topnum" jdbcType="REAL" />
+    <result column="state" property="state" jdbcType="BIT" />
+    <result column="doublepayrate" property="doublepayrate" jdbcType="REAL" />
+    <result column="rate" property="rate" jdbcType="REAL" />
+    <result column="nextdaystate" property="nextdaystate" jdbcType="BIT" />
+    <result column="nextdaytopnum" property="nextdaytopnum" jdbcType="REAL" />
+    <result column="nextdayrate" property="nextdayrate" jdbcType="REAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, prefix, type, currentnum, deductednum, topnum, state, doublepayrate, rate, nextdaystate, 
+    nextdaytopnum, nextdayrate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sql.bean.TWimipayCodeCountInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_wimipay_code_count_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_wimipay_code_count_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_wimipay_code_count_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sql.bean.TWimipayCodeCountInfoExample" >
+    delete from t_wimipay_code_count_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sql.bean.TWimipayCodeCountInfo" >
+    insert into t_wimipay_code_count_info (id, prefix, type, 
+      currentnum, deductednum, topnum, 
+      state, doublepayrate, rate, nextdaystate, 
+      nextdaytopnum, nextdayrate)
+    values (#{id,jdbcType=INTEGER}, #{prefix,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
+      #{currentnum,jdbcType=REAL}, #{deductednum,jdbcType=REAL}, #{topnum,jdbcType=REAL}, 
+      #{state,jdbcType=BIT}, #{doublepayrate,jdbcType=REAL}, #{rate,jdbcType=REAL}, #{nextdaystate,jdbcType=BIT}, 
+      #{nextdaytopnum,jdbcType=REAL}, #{nextdayrate,jdbcType=REAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sql.bean.TWimipayCodeCountInfo" >
+    insert into t_wimipay_code_count_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="prefix != null" >
+        prefix,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="currentnum != null" >
+        currentnum,
+      </if>
+      <if test="deductednum != null" >
+        deductednum,
+      </if>
+      <if test="topnum != null" >
+        topnum,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="doublepayrate != null" >
+        doublepayrate,
+      </if>
+      <if test="rate != null" >
+        rate,
+      </if>
+      <if test="nextdaystate != null" >
+        nextdaystate,
+      </if>
+      <if test="nextdaytopnum != null" >
+        nextdaytopnum,
+      </if>
+      <if test="nextdayrate != null" >
+        nextdayrate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="prefix != null" >
+        #{prefix,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="currentnum != null" >
+        #{currentnum,jdbcType=REAL},
+      </if>
+      <if test="deductednum != null" >
+        #{deductednum,jdbcType=REAL},
+      </if>
+      <if test="topnum != null" >
+        #{topnum,jdbcType=REAL},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=BIT},
+      </if>
+      <if test="doublepayrate != null" >
+        #{doublepayrate,jdbcType=REAL},
+      </if>
+      <if test="rate != null" >
+        #{rate,jdbcType=REAL},
+      </if>
+      <if test="nextdaystate != null" >
+        #{nextdaystate,jdbcType=BIT},
+      </if>
+      <if test="nextdaytopnum != null" >
+        #{nextdaytopnum,jdbcType=REAL},
+      </if>
+      <if test="nextdayrate != null" >
+        #{nextdayrate,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sql.bean.TWimipayCodeCountInfoExample" resultType="java.lang.Integer" >
+    select count(*) from t_wimipay_code_count_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  
+      <select id="selectByTable" resultMap="BaseResultMap" parameterType="com.sql.bean.TWimipayCodeCountInfo" >
+    select
+     <include refid="Base_Column_List" />
+    from ${tableName} 
+    where `type` = ${type} 
+  </select>
+   <update id="updateByTable"  parameterType="com.sql.bean.TWimipayCodeCountInfo" >
+    update ${tableName} 
+  
+   
+        <set >
+   
+    
+   
+   
+      <if test="topnum != null" >
+        topnum = #{topnum,jdbcType=REAL},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=BIT},
+      </if>
+      <if test="doublepayrate != null" >
+        doublepayrate = #{doublepayrate,jdbcType=REAL},
+      </if>
+      <if test="rate != null" >
+        rate = #{rate,jdbcType=REAL},
+      </if>
+      <if test="nextdaystate != null" >
+        nextdaystate = #{nextdaystate,jdbcType=BIT},
+      </if>
+      <if test="nextdaytopnum != null" >
+        nextdaytopnum = #{nextdaytopnum,jdbcType=REAL},
+      </if>
+      <if test="nextdayrate != null" >
+        nextdayrate = #{nextdayrate,jdbcType=REAL},
+      </if>
+    </set>
+    where id = ${id} 
+  </update>
+      
+  
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_wimipay_code_count_info
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.prefix != null" >
+        prefix = #{record.prefix,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.currentnum != null" >
+        currentnum = #{record.currentnum,jdbcType=REAL},
+      </if>
+      <if test="record.deductednum != null" >
+        deductednum = #{record.deductednum,jdbcType=REAL},
+      </if>
+      <if test="record.topnum != null" >
+        topnum = #{record.topnum,jdbcType=REAL},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=BIT},
+      </if>
+      <if test="record.doublepayrate != null" >
+        doublepayrate = #{record.doublepayrate,jdbcType=REAL},
+      </if>
+      <if test="record.rate != null" >
+        rate = #{record.rate,jdbcType=REAL},
+      </if>
+      <if test="record.nextdaystate != null" >
+        nextdaystate = #{record.nextdaystate,jdbcType=BIT},
+      </if>
+      <if test="record.nextdaytopnum != null" >
+        nextdaytopnum = #{record.nextdaytopnum,jdbcType=REAL},
+      </if>
+      <if test="record.nextdayrate != null" >
+        nextdayrate = #{record.nextdayrate,jdbcType=REAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_wimipay_code_count_info
+    set id = #{record.id,jdbcType=INTEGER},
+      prefix = #{record.prefix,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=INTEGER},
+      currentnum = #{record.currentnum,jdbcType=REAL},
+      deductednum = #{record.deductednum,jdbcType=REAL},
+      topnum = #{record.topnum,jdbcType=REAL},
+      state = #{record.state,jdbcType=BIT},
+      doublepayrate = #{record.doublepayrate,jdbcType=REAL},
+      rate = #{record.rate,jdbcType=REAL},
+      nextdaystate = #{record.nextdaystate,jdbcType=BIT},
+      nextdaytopnum = #{record.nextdaytopnum,jdbcType=REAL},
+      nextdayrate = #{record.nextdayrate,jdbcType=REAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sql.bean.TWimipayCodeCountInfo" >
+    update t_wimipay_code_count_info
+    <set >
+      <if test="prefix != null" >
+        prefix = #{prefix,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="currentnum != null" >
+        currentnum = #{currentnum,jdbcType=REAL},
+      </if>
+      <if test="deductednum != null" >
+        deductednum = #{deductednum,jdbcType=REAL},
+      </if>
+      <if test="topnum != null" >
+        topnum = #{topnum,jdbcType=REAL},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=BIT},
+      </if>
+      <if test="doublepayrate != null" >
+        doublepayrate = #{doublepayrate,jdbcType=REAL},
+      </if>
+      <if test="rate != null" >
+        rate = #{rate,jdbcType=REAL},
+      </if>
+      <if test="nextdaystate != null" >
+        nextdaystate = #{nextdaystate,jdbcType=BIT},
+      </if>
+      <if test="nextdaytopnum != null" >
+        nextdaytopnum = #{nextdaytopnum,jdbcType=REAL},
+      </if>
+      <if test="nextdayrate != null" >
+        nextdayrate = #{nextdayrate,jdbcType=REAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sql.bean.TWimipayCodeCountInfo" >
+    update t_wimipay_code_count_info
+    set prefix = #{prefix,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      currentnum = #{currentnum,jdbcType=REAL},
+      deductednum = #{deductednum,jdbcType=REAL},
+      topnum = #{topnum,jdbcType=REAL},
+      state = #{state,jdbcType=BIT},
+      doublepayrate = #{doublepayrate,jdbcType=REAL},
+      rate = #{rate,jdbcType=REAL},
+      nextdaystate = #{nextdaystate,jdbcType=BIT},
+      nextdaytopnum = #{nextdaytopnum,jdbcType=REAL},
+      nextdayrate = #{nextdayrate,jdbcType=REAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

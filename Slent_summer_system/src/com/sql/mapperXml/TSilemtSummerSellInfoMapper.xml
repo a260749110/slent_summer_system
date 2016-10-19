@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sql.mapper.TSilemtSummerSellInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.sql.mapperBean.TSilemtSummerSellInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="money_true" property="moneyTrue" jdbcType="REAL" />
+    <result column="sell_id" property="sellId" jdbcType="INTEGER" />
+    <result column="sell_name" property="sellName" jdbcType="VARCHAR" />
+    <result column="pay_id" property="payId" jdbcType="BIGINT" />
+    <result column="pay_type" property="payType" jdbcType="INTEGER" />
+    <result column="pay_name" property="payName" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="flight" property="flight" jdbcType="DATE" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="BIT" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, money_true, sell_id, sell_name, pay_id, pay_type, pay_name, time, flight, user_id, 
+    delete_flag, user_name
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sql.mapperBean.TSilemtSummerSellInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_silemt_summer_sell_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_silemt_summer_sell_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_silemt_summer_sell_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sql.mapperBean.TSilemtSummerSellInfoExample" >
+    delete from t_silemt_summer_sell_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sql.mapperBean.TSilemtSummerSellInfo" >
+    insert into t_silemt_summer_sell_info (id, money_true, sell_id, 
+      sell_name, pay_id, pay_type, 
+      pay_name, time, flight, 
+      user_id, delete_flag, user_name
+      )
+    values (#{id,jdbcType=INTEGER}, #{moneyTrue,jdbcType=REAL}, #{sellId,jdbcType=INTEGER}, 
+      #{sellName,jdbcType=VARCHAR}, #{payId,jdbcType=BIGINT}, #{payType,jdbcType=INTEGER}, 
+      #{payName,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, #{flight,jdbcType=DATE}, 
+      #{userId,jdbcType=INTEGER}, #{deleteFlag,jdbcType=BIT}, #{userName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sql.mapperBean.TSilemtSummerSellInfo" >
+    insert into t_silemt_summer_sell_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="moneyTrue != null" >
+        money_true,
+      </if>
+      <if test="sellId != null" >
+        sell_id,
+      </if>
+      <if test="sellName != null" >
+        sell_name,
+      </if>
+      <if test="payId != null" >
+        pay_id,
+      </if>
+      <if test="payType != null" >
+        pay_type,
+      </if>
+      <if test="payName != null" >
+        pay_name,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="flight != null" >
+        flight,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="moneyTrue != null" >
+        #{moneyTrue,jdbcType=REAL},
+      </if>
+      <if test="sellId != null" >
+        #{sellId,jdbcType=INTEGER},
+      </if>
+      <if test="sellName != null" >
+        #{sellName,jdbcType=VARCHAR},
+      </if>
+      <if test="payId != null" >
+        #{payId,jdbcType=BIGINT},
+      </if>
+      <if test="payType != null" >
+        #{payType,jdbcType=INTEGER},
+      </if>
+      <if test="payName != null" >
+        #{payName,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flight != null" >
+        #{flight,jdbcType=DATE},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="deleteFlag != null" >
+        #{deleteFlag,jdbcType=BIT},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sql.mapperBean.TSilemtSummerSellInfoExample" resultType="java.lang.Integer" >
+    select count(*) from t_silemt_summer_sell_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_silemt_summer_sell_info
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.moneyTrue != null" >
+        money_true = #{record.moneyTrue,jdbcType=REAL},
+      </if>
+      <if test="record.sellId != null" >
+        sell_id = #{record.sellId,jdbcType=INTEGER},
+      </if>
+      <if test="record.sellName != null" >
+        sell_name = #{record.sellName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payId != null" >
+        pay_id = #{record.payId,jdbcType=BIGINT},
+      </if>
+      <if test="record.payType != null" >
+        pay_type = #{record.payType,jdbcType=INTEGER},
+      </if>
+      <if test="record.payName != null" >
+        pay_name = #{record.payName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.time != null" >
+        time = #{record.time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.flight != null" >
+        flight = #{record.flight,jdbcType=DATE},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.deleteFlag != null" >
+        delete_flag = #{record.deleteFlag,jdbcType=BIT},
+      </if>
+      <if test="record.userName != null" >
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_silemt_summer_sell_info
+    set id = #{record.id,jdbcType=INTEGER},
+      money_true = #{record.moneyTrue,jdbcType=REAL},
+      sell_id = #{record.sellId,jdbcType=INTEGER},
+      sell_name = #{record.sellName,jdbcType=VARCHAR},
+      pay_id = #{record.payId,jdbcType=BIGINT},
+      pay_type = #{record.payType,jdbcType=INTEGER},
+      pay_name = #{record.payName,jdbcType=VARCHAR},
+      time = #{record.time,jdbcType=TIMESTAMP},
+      flight = #{record.flight,jdbcType=DATE},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      delete_flag = #{record.deleteFlag,jdbcType=BIT},
+      user_name = #{record.userName,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sql.mapperBean.TSilemtSummerSellInfo" >
+    update t_silemt_summer_sell_info
+    <set >
+      <if test="moneyTrue != null" >
+        money_true = #{moneyTrue,jdbcType=REAL},
+      </if>
+      <if test="sellId != null" >
+        sell_id = #{sellId,jdbcType=INTEGER},
+      </if>
+      <if test="sellName != null" >
+        sell_name = #{sellName,jdbcType=VARCHAR},
+      </if>
+      <if test="payId != null" >
+        pay_id = #{payId,jdbcType=BIGINT},
+      </if>
+      <if test="payType != null" >
+        pay_type = #{payType,jdbcType=INTEGER},
+      </if>
+      <if test="payName != null" >
+        pay_name = #{payName,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flight != null" >
+        flight = #{flight,jdbcType=DATE},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag,jdbcType=BIT},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sql.mapperBean.TSilemtSummerSellInfo" >
+    update t_silemt_summer_sell_info
+    set money_true = #{moneyTrue,jdbcType=REAL},
+      sell_id = #{sellId,jdbcType=INTEGER},
+      sell_name = #{sellName,jdbcType=VARCHAR},
+      pay_id = #{payId,jdbcType=BIGINT},
+      pay_type = #{payType,jdbcType=INTEGER},
+      pay_name = #{payName,jdbcType=VARCHAR},
+      time = #{time,jdbcType=TIMESTAMP},
+      flight = #{flight,jdbcType=DATE},
+      user_id = #{userId,jdbcType=INTEGER},
+      delete_flag = #{deleteFlag,jdbcType=BIT},
+      user_name = #{userName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

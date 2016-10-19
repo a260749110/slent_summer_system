@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sql.mapper.SVipMapper" >
+  <resultMap id="BaseResultMap" type="com.sql.mapperBean.SVip" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="pass_w" property="passW" jdbcType="VARCHAR" />
+    <result column="referee" property="referee" jdbcType="BIGINT" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="money" property="money" jdbcType="REAL" />
+    <result column="lvl" property="lvl" jdbcType="INTEGER" />
+    <result column="cut_off" property="cutOff" jdbcType="REAL" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="history" property="history" jdbcType="REAL" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.sql.mapperBean.SVip" extends="BaseResultMap" >
+    <result column="other" property="other" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, phone, pass_w, referee, sex, time, money, lvl, cut_off, age, history
+  </sql>
+  <sql id="Blob_Column_List" >
+    other
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.sql.mapperBean.SVipExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from s_vip
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sql.mapperBean.SVipExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from s_vip
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from s_vip
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from s_vip
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sql.mapperBean.SVipExample" >
+    delete from s_vip
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sql.mapperBean.SVip" >
+    insert into s_vip (id, name, phone, 
+      pass_w, referee, sex, 
+      time, money, lvl, cut_off, 
+      age, history, other
+      )
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{passW,jdbcType=VARCHAR}, #{referee,jdbcType=BIGINT}, #{sex,jdbcType=VARCHAR}, 
+      #{time,jdbcType=TIMESTAMP}, #{money,jdbcType=REAL}, #{lvl,jdbcType=INTEGER}, #{cutOff,jdbcType=REAL}, 
+      #{age,jdbcType=INTEGER}, #{history,jdbcType=REAL}, #{other,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sql.mapperBean.SVip" >
+    insert into s_vip
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="passW != null" >
+        pass_w,
+      </if>
+      <if test="referee != null" >
+        referee,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+      <if test="lvl != null" >
+        lvl,
+      </if>
+      <if test="cutOff != null" >
+        cut_off,
+      </if>
+      <if test="age != null" >
+        age,
+      </if>
+      <if test="history != null" >
+        history,
+      </if>
+      <if test="other != null" >
+        other,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="passW != null" >
+        #{passW,jdbcType=VARCHAR},
+      </if>
+      <if test="referee != null" >
+        #{referee,jdbcType=BIGINT},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=REAL},
+      </if>
+      <if test="lvl != null" >
+        #{lvl,jdbcType=INTEGER},
+      </if>
+      <if test="cutOff != null" >
+        #{cutOff,jdbcType=REAL},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="history != null" >
+        #{history,jdbcType=REAL},
+      </if>
+      <if test="other != null" >
+        #{other,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sql.mapperBean.SVipExample" resultType="java.lang.Integer" >
+    select count(*) from s_vip
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update s_vip
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.passW != null" >
+        pass_w = #{record.passW,jdbcType=VARCHAR},
+      </if>
+      <if test="record.referee != null" >
+        referee = #{record.referee,jdbcType=BIGINT},
+      </if>
+      <if test="record.sex != null" >
+        sex = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.time != null" >
+        time = #{record.time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.money != null" >
+        money = #{record.money,jdbcType=REAL},
+      </if>
+      <if test="record.lvl != null" >
+        lvl = #{record.lvl,jdbcType=INTEGER},
+      </if>
+      <if test="record.cutOff != null" >
+        cut_off = #{record.cutOff,jdbcType=REAL},
+      </if>
+      <if test="record.age != null" >
+        age = #{record.age,jdbcType=INTEGER},
+      </if>
+      <if test="record.history != null" >
+        history = #{record.history,jdbcType=REAL},
+      </if>
+      <if test="record.other != null" >
+        other = #{record.other,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update s_vip
+    set id = #{record.id,jdbcType=BIGINT},
+      name = #{record.name,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      pass_w = #{record.passW,jdbcType=VARCHAR},
+      referee = #{record.referee,jdbcType=BIGINT},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      time = #{record.time,jdbcType=TIMESTAMP},
+      money = #{record.money,jdbcType=REAL},
+      lvl = #{record.lvl,jdbcType=INTEGER},
+      cut_off = #{record.cutOff,jdbcType=REAL},
+      age = #{record.age,jdbcType=INTEGER},
+      history = #{record.history,jdbcType=REAL},
+      other = #{record.other,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update s_vip
+    set id = #{record.id,jdbcType=BIGINT},
+      name = #{record.name,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      pass_w = #{record.passW,jdbcType=VARCHAR},
+      referee = #{record.referee,jdbcType=BIGINT},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      time = #{record.time,jdbcType=TIMESTAMP},
+      money = #{record.money,jdbcType=REAL},
+      lvl = #{record.lvl,jdbcType=INTEGER},
+      cut_off = #{record.cutOff,jdbcType=REAL},
+      age = #{record.age,jdbcType=INTEGER},
+      history = #{record.history,jdbcType=REAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sql.mapperBean.SVip" >
+    update s_vip
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="passW != null" >
+        pass_w = #{passW,jdbcType=VARCHAR},
+      </if>
+      <if test="referee != null" >
+        referee = #{referee,jdbcType=BIGINT},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=REAL},
+      </if>
+      <if test="lvl != null" >
+        lvl = #{lvl,jdbcType=INTEGER},
+      </if>
+      <if test="cutOff != null" >
+        cut_off = #{cutOff,jdbcType=REAL},
+      </if>
+      <if test="age != null" >
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="history != null" >
+        history = #{history,jdbcType=REAL},
+      </if>
+      <if test="other != null" >
+        other = #{other,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.sql.mapperBean.SVip" >
+    update s_vip
+    set name = #{name,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      pass_w = #{passW,jdbcType=VARCHAR},
+      referee = #{referee,jdbcType=BIGINT},
+      sex = #{sex,jdbcType=VARCHAR},
+      time = #{time,jdbcType=TIMESTAMP},
+      money = #{money,jdbcType=REAL},
+      lvl = #{lvl,jdbcType=INTEGER},
+      cut_off = #{cutOff,jdbcType=REAL},
+      age = #{age,jdbcType=INTEGER},
+      history = #{history,jdbcType=REAL},
+      other = #{other,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sql.mapperBean.SVip" >
+    update s_vip
+    set name = #{name,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      pass_w = #{passW,jdbcType=VARCHAR},
+      referee = #{referee,jdbcType=BIGINT},
+      sex = #{sex,jdbcType=VARCHAR},
+      time = #{time,jdbcType=TIMESTAMP},
+      money = #{money,jdbcType=REAL},
+      lvl = #{lvl,jdbcType=INTEGER},
+      cut_off = #{cutOff,jdbcType=REAL},
+      age = #{age,jdbcType=INTEGER},
+      history = #{history,jdbcType=REAL}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

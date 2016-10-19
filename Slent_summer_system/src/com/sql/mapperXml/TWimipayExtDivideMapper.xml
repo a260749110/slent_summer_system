@@ -1,0 +1,674 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sql.mapper.TWimipayExtDivideMapper" >
+  <resultMap id="BaseResultMap" type="com.sql.bean.TWimipayExtDivide" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="code_no" property="codeNo" jdbcType="VARCHAR" />
+    <result column="wipay_id" property="wipayId" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="TINYINT" />
+    <result column="prefix" property="prefix" jdbcType="VARCHAR" />
+    <result column="pcode_no" property="pcodeNo" jdbcType="VARCHAR" />
+    <result column="memo" property="memo" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="VARCHAR" />
+    <result column="MMChannel" property="mmchannel" jdbcType="VARCHAR" />
+    <result column="MMChannel_343" property="mmchannel343" jdbcType="VARCHAR" />
+    <result column="doublePayPercent" property="doublepaypercent" jdbcType="INTEGER" />
+    <result column="umId" property="umid" jdbcType="VARCHAR" />
+    <result column="ddoId" property="ddoid" jdbcType="VARCHAR" />
+    <result column="unicomId" property="unicomid" jdbcType="VARCHAR" />
+    <result column="teleId" property="teleid" jdbcType="VARCHAR" />
+    <result column="unicomMusicId" property="unicommusicid" jdbcType="VARCHAR" />
+    <result column="dmsms" property="dmsms" jdbcType="VARCHAR" />
+    <result column="dmhqsms" property="dmhqsms" jdbcType="VARCHAR" />
+    <result column="telecomsky" property="telecomsky" jdbcType="VARCHAR" />
+    <result column="telecomwing" property="telecomwing" jdbcType="VARCHAR" />
+    <result column="unicomGD" property="unicomgd" jdbcType="VARCHAR" />
+    <result column="telecomsf" property="telecomsf" jdbcType="VARCHAR" />
+    <result column="telecomskySA" property="telecomskysa" jdbcType="VARCHAR" />
+    <result column="um_switch" property="umSwitch" jdbcType="VARCHAR" />
+    <result column="ddo_switch" property="ddoSwitch" jdbcType="VARCHAR" />
+    <result column="unicom_switch" property="unicomSwitch" jdbcType="VARCHAR" />
+    <result column="tele_switch" property="teleSwitch" jdbcType="VARCHAR" />
+    <result column="unicomMusic_switch" property="unicommusicSwitch" jdbcType="VARCHAR" />
+    <result column="dmsms_switch" property="dmsmsSwitch" jdbcType="VARCHAR" />
+    <result column="dmhqsms_switch" property="dmhqsmsSwitch" jdbcType="VARCHAR" />
+    <result column="telecomkey_switch" property="telecomkeySwitch" jdbcType="VARCHAR" />
+    <result column="telecomwing_switch" property="telecomwingSwitch" jdbcType="VARCHAR" />
+    <result column="unicomGD_switch" property="unicomgdSwitch" jdbcType="VARCHAR" />
+    <result column="telecomskySA_switch" property="telecomskysaSwitch" jdbcType="VARCHAR" />
+    <result column="telecomsf_switch" property="telecomsfSwitch" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, code_no, wipay_id, type, prefix, pcode_no, memo, price, MMChannel, MMChannel_343, 
+    doublePayPercent, umId, ddoId, unicomId, teleId, unicomMusicId, dmsms, dmhqsms, telecomsky, 
+    telecomwing, unicomGD, telecomsf, telecomskySA, um_switch, ddo_switch, unicom_switch, 
+    tele_switch, unicomMusic_switch, dmsms_switch, dmhqsms_switch, telecomkey_switch, 
+    telecomwing_switch, unicomGD_switch, telecomskySA_switch, telecomsf_switch
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sql.bean.TWimipayExtDivideExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_wimipay_ext_divide
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_wimipay_ext_divide
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_wimipay_ext_divide
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sql.bean.TWimipayExtDivide" >
+    insert into t_wimipay_ext_divide (id, code_no, wipay_id, 
+      type, prefix, pcode_no, 
+      memo, price, MMChannel, 
+      MMChannel_343, doublePayPercent, umId, 
+      ddoId, unicomId, teleId, 
+      unicomMusicId, dmsms, dmhqsms, 
+      telecomsky, telecomwing, unicomGD, 
+      telecomsf, telecomskySA, um_switch, 
+      ddo_switch, unicom_switch, tele_switch, 
+      unicomMusic_switch, dmsms_switch, dmhqsms_switch, 
+      telecomkey_switch, telecomwing_switch, unicomGD_switch, 
+      telecomskySA_switch, telecomsf_switch)
+    values (#{id,jdbcType=INTEGER}, #{codeNo,jdbcType=VARCHAR}, #{wipayId,jdbcType=VARCHAR}, 
+      #{type,jdbcType=TINYINT}, #{prefix,jdbcType=VARCHAR}, #{pcodeNo,jdbcType=VARCHAR}, 
+      #{memo,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR}, #{mmchannel,jdbcType=VARCHAR}, 
+      #{mmchannel343,jdbcType=VARCHAR}, #{doublepaypercent,jdbcType=INTEGER}, #{umid,jdbcType=VARCHAR}, 
+      #{ddoid,jdbcType=VARCHAR}, #{unicomid,jdbcType=VARCHAR}, #{teleid,jdbcType=VARCHAR}, 
+      #{unicommusicid,jdbcType=VARCHAR}, #{dmsms,jdbcType=VARCHAR}, #{dmhqsms,jdbcType=VARCHAR}, 
+      #{telecomsky,jdbcType=VARCHAR}, #{telecomwing,jdbcType=VARCHAR}, #{unicomgd,jdbcType=VARCHAR}, 
+      #{telecomsf,jdbcType=VARCHAR}, #{telecomskysa,jdbcType=VARCHAR}, #{umSwitch,jdbcType=VARCHAR}, 
+      #{ddoSwitch,jdbcType=VARCHAR}, #{unicomSwitch,jdbcType=VARCHAR}, #{teleSwitch,jdbcType=VARCHAR}, 
+      #{unicommusicSwitch,jdbcType=VARCHAR}, #{dmsmsSwitch,jdbcType=VARCHAR}, #{dmhqsmsSwitch,jdbcType=VARCHAR}, 
+      #{telecomkeySwitch,jdbcType=VARCHAR}, #{telecomwingSwitch,jdbcType=VARCHAR}, #{unicomgdSwitch,jdbcType=VARCHAR}, 
+      #{telecomskysaSwitch,jdbcType=VARCHAR}, #{telecomsfSwitch,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sql.bean.TWimipayExtDivide" >
+    insert into t_wimipay_ext_divide
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="codeNo != null" >
+        code_no,
+      </if>
+      <if test="wipayId != null" >
+        wipay_id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="prefix != null" >
+        prefix,
+      </if>
+      <if test="pcodeNo != null" >
+        pcode_no,
+      </if>
+      <if test="memo != null" >
+        memo,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="mmchannel != null" >
+        MMChannel,
+      </if>
+      <if test="mmchannel343 != null" >
+        MMChannel_343,
+      </if>
+      <if test="doublepaypercent != null" >
+        doublePayPercent,
+      </if>
+      <if test="umid != null" >
+        umId,
+      </if>
+      <if test="ddoid != null" >
+        ddoId,
+      </if>
+      <if test="unicomid != null" >
+        unicomId,
+      </if>
+      <if test="teleid != null" >
+        teleId,
+      </if>
+      <if test="unicommusicid != null" >
+        unicomMusicId,
+      </if>
+      <if test="dmsms != null" >
+        dmsms,
+      </if>
+      <if test="dmhqsms != null" >
+        dmhqsms,
+      </if>
+      <if test="telecomsky != null" >
+        telecomsky,
+      </if>
+      <if test="telecomwing != null" >
+        telecomwing,
+      </if>
+      <if test="unicomgd != null" >
+        unicomGD,
+      </if>
+      <if test="telecomsf != null" >
+        telecomsf,
+      </if>
+      <if test="telecomskysa != null" >
+        telecomskySA,
+      </if>
+      <if test="umSwitch != null" >
+        um_switch,
+      </if>
+      <if test="ddoSwitch != null" >
+        ddo_switch,
+      </if>
+      <if test="unicomSwitch != null" >
+        unicom_switch,
+      </if>
+      <if test="teleSwitch != null" >
+        tele_switch,
+      </if>
+      <if test="unicommusicSwitch != null" >
+        unicomMusic_switch,
+      </if>
+      <if test="dmsmsSwitch != null" >
+        dmsms_switch,
+      </if>
+      <if test="dmhqsmsSwitch != null" >
+        dmhqsms_switch,
+      </if>
+      <if test="telecomkeySwitch != null" >
+        telecomkey_switch,
+      </if>
+      <if test="telecomwingSwitch != null" >
+        telecomwing_switch,
+      </if>
+      <if test="unicomgdSwitch != null" >
+        unicomGD_switch,
+      </if>
+      <if test="telecomskysaSwitch != null" >
+        telecomskySA_switch,
+      </if>
+      <if test="telecomsfSwitch != null" >
+        telecomsf_switch,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="codeNo != null" >
+        #{codeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="wipayId != null" >
+        #{wipayId,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="prefix != null" >
+        #{prefix,jdbcType=VARCHAR},
+      </if>
+      <if test="pcodeNo != null" >
+        #{pcodeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null" >
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="mmchannel != null" >
+        #{mmchannel,jdbcType=VARCHAR},
+      </if>
+      <if test="mmchannel343 != null" >
+        #{mmchannel343,jdbcType=VARCHAR},
+      </if>
+      <if test="doublepaypercent != null" >
+        #{doublepaypercent,jdbcType=INTEGER},
+      </if>
+      <if test="umid != null" >
+        #{umid,jdbcType=VARCHAR},
+      </if>
+      <if test="ddoid != null" >
+        #{ddoid,jdbcType=VARCHAR},
+      </if>
+      <if test="unicomid != null" >
+        #{unicomid,jdbcType=VARCHAR},
+      </if>
+      <if test="teleid != null" >
+        #{teleid,jdbcType=VARCHAR},
+      </if>
+      <if test="unicommusicid != null" >
+        #{unicommusicid,jdbcType=VARCHAR},
+      </if>
+      <if test="dmsms != null" >
+        #{dmsms,jdbcType=VARCHAR},
+      </if>
+      <if test="dmhqsms != null" >
+        #{dmhqsms,jdbcType=VARCHAR},
+      </if>
+      <if test="telecomsky != null" >
+        #{telecomsky,jdbcType=VARCHAR},
+      </if>
+      <if test="telecomwing != null" >
+        #{telecomwing,jdbcType=VARCHAR},
+      </if>
+      <if test="unicomgd != null" >
+        #{unicomgd,jdbcType=VARCHAR},
+      </if>
+      <if test="telecomsf != null" >
+        #{telecomsf,jdbcType=VARCHAR},
+      </if>
+      <if test="telecomskysa != null" >
+        #{telecomskysa,jdbcType=VARCHAR},
+      </if>
+      <if test="umSwitch != null" >
+        #{umSwitch,jdbcType=VARCHAR},
+      </if>
+      <if test="ddoSwitch != null" >
+        #{ddoSwitch,jdbcType=VARCHAR},
+      </if>
+      <if test="unicomSwitch != null" >
+        #{unicomSwitch,jdbcType=VARCHAR},
+      </if>
+      <if test="teleSwitch != null" >
+        #{teleSwitch,jdbcType=VARCHAR},
+      </if>
+      <if test="unicommusicSwitch != null" >
+        #{unicommusicSwitch,jdbcType=VARCHAR},
+      </if>
+      <if test="dmsmsSwitch != null" >
+        #{dmsmsSwitch,jdbcType=VARCHAR},
+      </if>
+      <if test="dmhqsmsSwitch != null" >
+        #{dmhqsmsSwitch,jdbcType=VARCHAR},
+      </if>
+      <if test="telecomkeySwitch != null" >
+        #{telecomkeySwitch,jdbcType=VARCHAR},
+      </if>
+      <if test="telecomwingSwitch != null" >
+        #{telecomwingSwitch,jdbcType=VARCHAR},
+      </if>
+      <if test="unicomgdSwitch != null" >
+        #{unicomgdSwitch,jdbcType=VARCHAR},
+      </if>
+      <if test="telecomskysaSwitch != null" >
+        #{telecomskysaSwitch,jdbcType=VARCHAR},
+      </if>
+      <if test="telecomsfSwitch != null" >
+        #{telecomsfSwitch,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_wimipay_ext_divide
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.codeNo != null" >
+        code_no = #{record.codeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wipayId != null" >
+        wipay_id = #{record.wipayId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=TINYINT},
+      </if>
+      <if test="record.prefix != null" >
+        prefix = #{record.prefix,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pcodeNo != null" >
+        pcode_no = #{record.pcodeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memo != null" >
+        memo = #{record.memo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mmchannel != null" >
+        MMChannel = #{record.mmchannel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mmchannel343 != null" >
+        MMChannel_343 = #{record.mmchannel343,jdbcType=VARCHAR},
+      </if>
+      <if test="record.doublepaypercent != null" >
+        doublePayPercent = #{record.doublepaypercent,jdbcType=INTEGER},
+      </if>
+      <if test="record.umid != null" >
+        umId = #{record.umid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ddoid != null" >
+        ddoId = #{record.ddoid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unicomid != null" >
+        unicomId = #{record.unicomid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teleid != null" >
+        teleId = #{record.teleid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unicommusicid != null" >
+        unicomMusicId = #{record.unicommusicid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dmsms != null" >
+        dmsms = #{record.dmsms,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dmhqsms != null" >
+        dmhqsms = #{record.dmhqsms,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telecomsky != null" >
+        telecomsky = #{record.telecomsky,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telecomwing != null" >
+        telecomwing = #{record.telecomwing,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unicomgd != null" >
+        unicomGD = #{record.unicomgd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telecomsf != null" >
+        telecomsf = #{record.telecomsf,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telecomskysa != null" >
+        telecomskySA = #{record.telecomskysa,jdbcType=VARCHAR},
+      </if>
+      <if test="record.umSwitch != null" >
+        um_switch = #{record.umSwitch,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ddoSwitch != null" >
+        ddo_switch = #{record.ddoSwitch,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unicomSwitch != null" >
+        unicom_switch = #{record.unicomSwitch,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teleSwitch != null" >
+        tele_switch = #{record.teleSwitch,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unicommusicSwitch != null" >
+        unicomMusic_switch = #{record.unicommusicSwitch,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dmsmsSwitch != null" >
+        dmsms_switch = #{record.dmsmsSwitch,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dmhqsmsSwitch != null" >
+        dmhqsms_switch = #{record.dmhqsmsSwitch,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telecomkeySwitch != null" >
+        telecomkey_switch = #{record.telecomkeySwitch,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telecomwingSwitch != null" >
+        telecomwing_switch = #{record.telecomwingSwitch,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unicomgdSwitch != null" >
+        unicomGD_switch = #{record.unicomgdSwitch,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telecomskysaSwitch != null" >
+        telecomskySA_switch = #{record.telecomskysaSwitch,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telecomsfSwitch != null" >
+        telecomsf_switch = #{record.telecomsfSwitch,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_wimipay_ext_divide
+    set id = #{record.id,jdbcType=INTEGER},
+      code_no = #{record.codeNo,jdbcType=VARCHAR},
+      wipay_id = #{record.wipayId,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=TINYINT},
+      prefix = #{record.prefix,jdbcType=VARCHAR},
+      pcode_no = #{record.pcodeNo,jdbcType=VARCHAR},
+      memo = #{record.memo,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=VARCHAR},
+      MMChannel = #{record.mmchannel,jdbcType=VARCHAR},
+      MMChannel_343 = #{record.mmchannel343,jdbcType=VARCHAR},
+      doublePayPercent = #{record.doublepaypercent,jdbcType=INTEGER},
+      umId = #{record.umid,jdbcType=VARCHAR},
+      ddoId = #{record.ddoid,jdbcType=VARCHAR},
+      unicomId = #{record.unicomid,jdbcType=VARCHAR},
+      teleId = #{record.teleid,jdbcType=VARCHAR},
+      unicomMusicId = #{record.unicommusicid,jdbcType=VARCHAR},
+      dmsms = #{record.dmsms,jdbcType=VARCHAR},
+      dmhqsms = #{record.dmhqsms,jdbcType=VARCHAR},
+      telecomsky = #{record.telecomsky,jdbcType=VARCHAR},
+      telecomwing = #{record.telecomwing,jdbcType=VARCHAR},
+      unicomGD = #{record.unicomgd,jdbcType=VARCHAR},
+      telecomsf = #{record.telecomsf,jdbcType=VARCHAR},
+      telecomskySA = #{record.telecomskysa,jdbcType=VARCHAR},
+      um_switch = #{record.umSwitch,jdbcType=VARCHAR},
+      ddo_switch = #{record.ddoSwitch,jdbcType=VARCHAR},
+      unicom_switch = #{record.unicomSwitch,jdbcType=VARCHAR},
+      tele_switch = #{record.teleSwitch,jdbcType=VARCHAR},
+      unicomMusic_switch = #{record.unicommusicSwitch,jdbcType=VARCHAR},
+      dmsms_switch = #{record.dmsmsSwitch,jdbcType=VARCHAR},
+      dmhqsms_switch = #{record.dmhqsmsSwitch,jdbcType=VARCHAR},
+      telecomkey_switch = #{record.telecomkeySwitch,jdbcType=VARCHAR},
+      telecomwing_switch = #{record.telecomwingSwitch,jdbcType=VARCHAR},
+      unicomGD_switch = #{record.unicomgdSwitch,jdbcType=VARCHAR},
+      telecomskySA_switch = #{record.telecomskysaSwitch,jdbcType=VARCHAR},
+      telecomsf_switch = #{record.telecomsfSwitch,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sql.bean.TWimipayExtDivide" >
+    update t_wimipay_ext_divide
+    <set >
+      <if test="codeNo != null" >
+        code_no = #{codeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="wipayId != null" >
+        wipay_id = #{wipayId,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="prefix != null" >
+        prefix = #{prefix,jdbcType=VARCHAR},
+      </if>
+      <if test="pcodeNo != null" >
+        pcode_no = #{pcodeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null" >
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="mmchannel != null" >
+        MMChannel = #{mmchannel,jdbcType=VARCHAR},
+      </if>
+      <if test="mmchannel343 != null" >
+        MMChannel_343 = #{mmchannel343,jdbcType=VARCHAR},
+      </if>
+      <if test="doublepaypercent != null" >
+        doublePayPercent = #{doublepaypercent,jdbcType=INTEGER},
+      </if>
+      <if test="umid != null" >
+        umId = #{umid,jdbcType=VARCHAR},
+      </if>
+      <if test="ddoid != null" >
+        ddoId = #{ddoid,jdbcType=VARCHAR},
+      </if>
+      <if test="unicomid != null" >
+        unicomId = #{unicomid,jdbcType=VARCHAR},
+      </if>
+      <if test="teleid != null" >
+        teleId = #{teleid,jdbcType=VARCHAR},
+      </if>
+      <if test="unicommusicid != null" >
+        unicomMusicId = #{unicommusicid,jdbcType=VARCHAR},
+      </if>
+      <if test="dmsms != null" >
+        dmsms = #{dmsms,jdbcType=VARCHAR},
+      </if>
+      <if test="dmhqsms != null" >
+        dmhqsms = #{dmhqsms,jdbcType=VARCHAR},
+      </if>
+      <if test="telecomsky != null" >
+        telecomsky = #{telecomsky,jdbcType=VARCHAR},
+      </if>
+      <if test="telecomwing != null" >
+        telecomwing = #{telecomwing,jdbcType=VARCHAR},
+      </if>
+      <if test="unicomgd != null" >
+        unicomGD = #{unicomgd,jdbcType=VARCHAR},
+      </if>
+      <if test="telecomsf != null" >
+        telecomsf = #{telecomsf,jdbcType=VARCHAR},
+      </if>
+      <if test="telecomskysa != null" >
+        telecomskySA = #{telecomskysa,jdbcType=VARCHAR},
+      </if>
+      <if test="umSwitch != null" >
+        um_switch = #{umSwitch,jdbcType=VARCHAR},
+      </if>
+      <if test="ddoSwitch != null" >
+        ddo_switch = #{ddoSwitch,jdbcType=VARCHAR},
+      </if>
+      <if test="unicomSwitch != null" >
+        unicom_switch = #{unicomSwitch,jdbcType=VARCHAR},
+      </if>
+      <if test="teleSwitch != null" >
+        tele_switch = #{teleSwitch,jdbcType=VARCHAR},
+      </if>
+      <if test="unicommusicSwitch != null" >
+        unicomMusic_switch = #{unicommusicSwitch,jdbcType=VARCHAR},
+      </if>
+      <if test="dmsmsSwitch != null" >
+        dmsms_switch = #{dmsmsSwitch,jdbcType=VARCHAR},
+      </if>
+      <if test="dmhqsmsSwitch != null" >
+        dmhqsms_switch = #{dmhqsmsSwitch,jdbcType=VARCHAR},
+      </if>
+      <if test="telecomkeySwitch != null" >
+        telecomkey_switch = #{telecomkeySwitch,jdbcType=VARCHAR},
+      </if>
+      <if test="telecomwingSwitch != null" >
+        telecomwing_switch = #{telecomwingSwitch,jdbcType=VARCHAR},
+      </if>
+      <if test="unicomgdSwitch != null" >
+        unicomGD_switch = #{unicomgdSwitch,jdbcType=VARCHAR},
+      </if>
+      <if test="telecomskysaSwitch != null" >
+        telecomskySA_switch = #{telecomskysaSwitch,jdbcType=VARCHAR},
+      </if>
+      <if test="telecomsfSwitch != null" >
+        telecomsf_switch = #{telecomsfSwitch,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sql.bean.TWimipayExtDivide" >
+    update t_wimipay_ext_divide
+    set code_no = #{codeNo,jdbcType=VARCHAR},
+      wipay_id = #{wipayId,jdbcType=VARCHAR},
+      type = #{type,jdbcType=TINYINT},
+      prefix = #{prefix,jdbcType=VARCHAR},
+      pcode_no = #{pcodeNo,jdbcType=VARCHAR},
+      memo = #{memo,jdbcType=VARCHAR},
+      price = #{price,jdbcType=VARCHAR},
+      MMChannel = #{mmchannel,jdbcType=VARCHAR},
+      MMChannel_343 = #{mmchannel343,jdbcType=VARCHAR},
+      doublePayPercent = #{doublepaypercent,jdbcType=INTEGER},
+      umId = #{umid,jdbcType=VARCHAR},
+      ddoId = #{ddoid,jdbcType=VARCHAR},
+      unicomId = #{unicomid,jdbcType=VARCHAR},
+      teleId = #{teleid,jdbcType=VARCHAR},
+      unicomMusicId = #{unicommusicid,jdbcType=VARCHAR},
+      dmsms = #{dmsms,jdbcType=VARCHAR},
+      dmhqsms = #{dmhqsms,jdbcType=VARCHAR},
+      telecomsky = #{telecomsky,jdbcType=VARCHAR},
+      telecomwing = #{telecomwing,jdbcType=VARCHAR},
+      unicomGD = #{unicomgd,jdbcType=VARCHAR},
+      telecomsf = #{telecomsf,jdbcType=VARCHAR},
+      telecomskySA = #{telecomskysa,jdbcType=VARCHAR},
+      um_switch = #{umSwitch,jdbcType=VARCHAR},
+      ddo_switch = #{ddoSwitch,jdbcType=VARCHAR},
+      unicom_switch = #{unicomSwitch,jdbcType=VARCHAR},
+      tele_switch = #{teleSwitch,jdbcType=VARCHAR},
+      unicomMusic_switch = #{unicommusicSwitch,jdbcType=VARCHAR},
+      dmsms_switch = #{dmsmsSwitch,jdbcType=VARCHAR},
+      dmhqsms_switch = #{dmhqsmsSwitch,jdbcType=VARCHAR},
+      telecomkey_switch = #{telecomkeySwitch,jdbcType=VARCHAR},
+      telecomwing_switch = #{telecomwingSwitch,jdbcType=VARCHAR},
+      unicomGD_switch = #{unicomgdSwitch,jdbcType=VARCHAR},
+      telecomskySA_switch = #{telecomskysaSwitch,jdbcType=VARCHAR},
+      telecomsf_switch = #{telecomsfSwitch,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
