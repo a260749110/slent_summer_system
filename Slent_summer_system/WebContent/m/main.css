@@ -94,7 +94,7 @@ input{width:130px; height:30px; margin:2px 0px;}
 .button_choice{width:70px; height:24px; margin:4px 1px;color:#fff;}
 .button_btm{ width:70px; height:30px; margin:0px 0px 0px 0px;}
 .button_btm_btm{ width:100px; height:30px; margin:0px 0px 0px 0px;}
-.pay{ width:100%; margin:14px 0;}
+.pay{ width:100%; margin:0px 0;}
 .slelce_name
 {
 	float:left;
@@ -113,7 +113,7 @@ li{	list-style:none;
 	width:97%;
 }
 .foot{
-	padding: 4px;
+	padding: 0px;
 	background-color: #CCC;
 	margin-top: 10px;
 	padding-bottom: 0px;
