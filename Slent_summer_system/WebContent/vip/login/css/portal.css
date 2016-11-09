@@ -1,0 +1,42 @@
+
+/* 频道&文章 */
+/* 频道 */
+.clt { padding:10px 10px 9px; }
+.clt h1 { padding:2px 0 8px; font-size:20px; line-height:24px; }
+.clt h1 span { margin-left:6px; font-size:14px; color:#f60; }
+.clt .mess { line-height:20px; font-size:14px; color:#666; min-height:105px; overflow:hidden; }
+.clt img { float:left; width:120px; height:92px; margin:3px 9px 0 1px; }
+.clt .sp { padding:8px 0 0; text-align:right; }
+.ccat { background:#f7f7f7; }
+.ccat a { display:block; padding:16px 50px 16px 10px; color:#444; text-decoration:none; position:relative; z-index:1; }
+.ccat a:after { content:''; right:10px; top:39%; }
+
+.ccat a span { float:right; color:#fff; padding:2px 4px; background:#f60; }
+
+/* 文章 */
+.ctt .mess { padding: 10px 10px 5px; line-height:150%; font-size:15px; color:#666; border-top:1px solid #fff; }
+.ctt .mess img { max-width:100%; }
+.ctt .mess embed { max-width:100% !important; height:260px !important; }
+.ctt .pgbox, .ctt .pg { border:none; background:none; }
+
+.atd { margin: 10px auto 0px; }
+.atd td { padding: 25px 2px 20px; text-align: center; vertical-align: bottom; font-size:10px; }
+.atd td a { color:#aaa; }
+.atd img { width:18px; height:18px; }
+.atd a { display: block; padding:0px 5px; }
+.atd a:hover { text-decoration: none; }
+.atd p { line-height:10px; height:10px; }
+.atd .atdc { position: relative; margin: 0 auto 10px; width:10px; height: 30px; }
+.atdc div { position: absolute; left: 0; bottom: 0; width: 10px; text-align: center; }
+.atd .ac1 { background: #C30; }
+.atd .ac2 { background: #0C0; }
+.atd .ac3 { background: #F90; }
+.atd .ac4 { background: #06F; }
+
+/* 文章回复 */
+.celi { padding:0px 10px 8px 48px; min-height:70px; position:relative; }
+.celi .avatar img { width:28px; height:28px; position:absolute; left:10px; top:10px; }
+.celi .user { padding:8px 0px; }
+.celi .vtrim { margin-top:5px; }
+.celi .mess { padding-bottom:3px; line-height:20px; color:#555; }
+.celi .quote { font-size:12px; border-top: 1px dashed #d9d9d9; border-bottom: 1px dashed #d9d9d9; margin:5px 0px; color:#999; }

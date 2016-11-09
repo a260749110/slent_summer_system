@@ -86,7 +86,7 @@ p,ul li,ol li{
 .mobile-side-menu {
   width: 240px;
   display: none;
-  background-color: #004f27;
+  background-color: #005a4e;
   bottom: 0px;
   z-index: 30;
   overflow-x: hidden;
@@ -100,7 +100,7 @@ p,ul li,ol li{
   display: inline-block;
   margin: auto;
   width: 100%;
-  background-color: #004f27;
+  background-color: #005a4e;
   border-radius: 5px;
   list-style: none;
 }
@@ -152,7 +152,7 @@ p,ul li,ol li{
 }
 
 .navbar {
-  background-color:#00db6d;
+  background-color:#0DD874;
   position: fixed;
   top: 0;
   left: 0;
@@ -215,7 +215,7 @@ p,ul li,ol li{
 }
 .navbar {
     margin-bottom: 0;
-    border-top: 3px solid #f4b305;
+    border-top: 0px solid #f4b305;
 }
 .mobile-side-menu ul > li:first-child{
 	padding-top:1em;
@@ -223,7 +223,7 @@ p,ul li,ol li{
 .agileinfo_logo{
 	padding: 4.5em 0 .5em;
     text-align: center;
-    background: #007bcf;
+    background: #ff6138;
 }
 .agileinfo_logo h1 a{
 	font-size:1.2em;
@@ -1749,11 +1749,33 @@ h3.agileits-icons-title {
 .w3_agile_contact_grid1 input[type="submit"]:hover{
 	background:#f4b305;
 }
+.div_qiandao
+{
+	text-align: center;
+	width: 100%;
+}
+.btn_qiandao
+{
+	outline: none;
+    width: 40%;
+    background: #0dd874;
+    color: #fff;
+    padding: 10px 0;
+    font-size: 14px;
+    border: none;
+   
+}
+.btn_qiandao:hover
+{
+		background:#f4b305;
+}
 .w3_map iframe{
 	width:100%;
 	min-height:200px;
 	margin-bottom:-6px;
 }
+
+
 /*-- sign-in --*/
 /*--//main--*/
 .agileits-login {

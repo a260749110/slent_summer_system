@@ -13,6 +13,7 @@ import org.json.JSONObject;
 
 import com.data.PayObj.Line;
 import com.sql.MyBatisManager;
+import com.sql.mapper.SVipMapper;
 import com.sql.mapper.TMenuChoiceMapper;
 import com.sql.mapper.TMenuGroupMapper;
 import com.sql.mapper.TMenuLineMapper;
@@ -20,6 +21,7 @@ import com.sql.mapper.TMenuPaymentInfoMapper;
 import com.sql.mapper.TNoahTitlesMapper;
 import com.sql.mapper.TSilemtSummerSellInfoMapper;
 import com.sql.mapper.TUserMapper;
+import com.sql.mapperBean.SVip;
 import com.sql.mapperBean.TMenuLine;
 import com.sql.mapperBean.TMenuLineExample;
 import com.sql.mapperBean.TMenuPaymentInfo;
@@ -58,7 +60,15 @@ public class DataHelper {
 		session.close();
 		return result;
 	}
-
+public void updataSvipById(SVip sVip)
+{
+	SqlSession session=MyBatisManager.instance.getSession();
+	SVipMapper mapper=session.getMapper(SVipMapper.class);
+	mapper.updateByPrimaryKeyWithBLOBs(sVip);
+	session.commit();
+	
+	session.close();
+	}
 	public List<TMenuGroup> getGroupList() {
 		SqlSession session = MyBatisManager.instance.getSession();
 		TMenuGroupMapper mapper = session.getMapper(TMenuGroupMapper.class);

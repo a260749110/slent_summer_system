@@ -1,0 +1,127 @@
+
+/* forum.php页面的样式表 */
+
+/* 论坛版块 */ 
+.catlist { background:#fafafa; overflow:hidden; }
+.catlist h1 { padding:11px 6px 9px 10px; background:#f5f5f5 url(../mplus/img/c_nm.png) repeat-x 0px 0px; }
+.catlist h1 span { float:right; display:block; width:15px; height:15px; text-align:center; color:#888; background: url(../mplus/img/o.png) no-repeat 0px 0px; }
+.catlist h1 span.o { background-position:0px -14px; }
+.catlist li { min-height:58px; position:relative; }
+.catlist a.a { display:block; height:38px; padding:10px 60px 10px 56px; position:relative; z-index:1; }
+.catlist a.a span { position:absolute; top:9px; right:13px; color:#fff; padding:1px 5px; margin-top:10px; border:2px solid #fff; border-radius:10px; }
+.catlist img { position:absolute; width:38px; height:38px; top:11px; left:10px; z-index:2; }
+.catlist .f_nm { margin-bottom:6px; padding-top:3px; }
+.catlist .f_dp { line-height:13px; }
+.clnb { border-radius:0 !important; margin-bottom:0px !important; background:#f7f7f7; }
+
+/* 美图 */
+#threadlist { padding-top:8px; max-width:320px; margin:auto; }
+#threadlist .a_pg { background:none; }
+#threadlist .a_pg a { border:none; }
+.waterfall { position:relative; width:320px !important; margin:0px auto; }
+.waterfall li { width:96px; margin:0px 0px 8px 8px; padding:0px; position:relative; overflow:hidden; }
+.waterfall li a { display:block; overflow:hidden; }
+.waterfall img { float:left; width:96px; }
+
+/* 主题列表 */
+.thlist a { display:block; min-height:36px; padding:10px 10px 12px; color:#444; text-decoration:none; background-repeat:no-repeat; background-position:8px 13px; background-size: 11px 11px; }
+.thlist a h1 { line-height:20px; font-size:15px; font-weight:100; margin-bottom:8px; }
+.thlist a h1 img { vertical-align: top; }
+.thlist a p { color:#bbb; margin-bottom:-2px; }
+.thlist a .replies { float:right; padding-right:15px; background: url(../mplus/img/replies.png) no-repeat 100% 50%; }
+.thlist_gd a { padding:10px 8px 12px 10px; }
+.thlist a.guide { position:relative; padding-left:58px; }
+.thlist span.rep { display:block; width:40px; text-align:center; padding:6px 0px; position:absolute; top:10px; left:10px; background:#eee; }
+
+/* 图片列表 */
+.fplist { margin:0px; overflow:hidden; }
+.fplist li { min-height:60px; padding:10px; overflow:hidden; }
+.fplist li a { display:block; min-height:60px; padding-left:85px; position:relative; }
+.fplist img.cphoto { width:75px; height:60px; position:absolute; top:0px; left:0px; }
+.fplist h1 { min-height:40px; line-height:20px; font-size:16px; font-weight:100; margin-bottom:5px; }
+.fplist p { line-height:16px; font-size:12px; color:#bbb; }
+.fplist .replies { float:right; padding-right:15px; background: url(../mplus/img/replies.png) no-repeat 100% 50%; }
+
+/* 分类 */
+.thtyss { padding:8px 10px; background:#f7f7f7; }
+.thtyss a { width:45%; display:inline-block; margin:3px 4px; padding:5px 0px; text-align:center; background:#eee; border-radius: 16px; border:2px solid #fff; }
+.thtyss a.a { color:#fff; }
+
+.ptypes { width:100%; overflow:hidden; }
+.ptypes span { display:inline-block; padding:7px 8px 5px; }
+.ptype { float:left; width:60%; background:#fcfcfc; border:2px solid #eaeaea; margin-right:4px; margin-bottom:10px !important; }
+.ptype select { height:28px; width:100%; line-height:26px; padding:4px; background: none; color:#777; font-size:13px; border:1px solid #ddd !important; border-radius: 5px !important; }
+
+/* 子版块&分类 */
+#thtys { width:50px; padding-right:11px; }
+#subfrm { padding-right:15px; }
+#thtys, #subfrm { background-image: url(../mplus/img/arrow_1.png); background-repeat:no-repeat; background-position:100% 0; }
+.thtys, .subfrm { background-position:100% -28px !important;}
+
+/* 帖子阅读页 */
+.vt_th { line-height:28px; font-size:20px; padding:16px 10px 10px; font-weight:100; border-top:1px solid #fff; }
+.vt_th span { margin-left:6px; font-size:14px; color:#f60; }
+.user { padding:10px 10px 0px; color:#888; }
+.user .p_nm { margin-top:1px; }
+.user .p_dl { color:#bbb; }
+.user_first { padding:1px 10px 14px; color:#888; border-bottom:1px solid #e3e3e3; }
+.user a, .user_first a { color:#005088; }
+.user_first a.fav { float:right; height:11px; padding:3px 5px; margin-top:-2px; line-height:11px; background:#e5e5e5; overflow:hidden; }
+.vb { }
+.vb .pbody .mes { min-height:70px; }
+.vc { position:relative; padding-left:38px !important; }
+.vc .pbody .mes { min-height:50px; }
+.vbc { padding:10px 10px 10px; border-top:1px solid #fff; }
+.vt .avatar img { width:28px; height:28px; position:absolute; left:10px; top:10px; }
+.vt .pbody { margin-bottom: 5px; }
+.vt .pbody h2{ font-weight: 100; font-size:16px; margin:5px 0px; }
+.vt .pbody .mes { padding: 1px 0px 5px; font-size:15px; color:#666; }
+.vt .pbody .mes a { color: #005088; }
+.vt .pbody img { max-width:100%; }
+.vt .postmessage { line-height:150%; }
+.vt .attach { line-height:18px; }	
+.vt .attach img { width: 18px; vertical-align: middle; }
+.vt .bm .bm_c .attach_h { margin-top: 4px;}
+.vt .bm .bm_c .attach .vm { width: 14px; vertical-align: middle;}
+.vt .bm .bm_h a { display: inline; width: auto;}
+.vt .bm .bm_inf{ padding:7px 8px; color: #aaa; }
+.vt .bm .bm_inf a { color:#aaa; }
+.vt .bm .bm_inf .pipe { margin:0 8px; }
+.vt .bm .bm_c { padding: 5px 0px; border-top: 1px dashed #d9d9d9; border-bottom: 1px dashed #d9d9d9; color: #666;  }
+.vt .quote, .vt .blockcode { font-size:12px; border-top: 1px dashed #d9d9d9; border-bottom: 1px dashed #d9d9d9; margin:5px 0px; color:#999; }
+.vt .blockcode { padding:5px; }
+.vt .blockcode div { display:none; }
+.vtrim { height:22px; overflow:hidden; }
+.vtrim a { float:right; margin-left:5px; padding:5px 7px; color:#fff; background:#ccc; }
+.vtrim span a { background: #CFC872; }
+.vtrim .pipe { display:none; }
+.nsj { padding:9px 10px 7px; background:#fcfcfc; overflow:hidden; }
+.nsj li { padding:4px 0px 4px 1px; overflow:hidden; }
+.nsj, .nsj a { color:#777; }
+.vt embed { max-width:100% !important; height:260px !important; }
+.imgstyle { text-align:center; padding:5px 0px 2px; overflow:hidden; }
+.imgstyle img { display:block; }
+.imgstyle a { display: inline-block; margin:0px auto; }
+
+.vfnxt a { display:block; text-align:center; padding:14px 10px 12px; }
+.viewsort img { vertical-align:top; }
+.dea { display:inline-block; padding:2px 7px; margin-top:5px; background:#ccc; border-radius: 10px; color:#fff; }
+.postatt { padding:4px 3px; margin-top:7px; font-style:italic; color:#f60; font-size:13px; text-align:center; background: #FEFFF0; border-top:1px dashed #f90; border-bottom:1px dashed #f90; }
+.jammer { display:none !important; }
+
+/* 发帖按钮 */
+a.f_pst { display:inline-block; width:60px; padding:7px 0px; text-align:center; background: #f60 url(../mplus/img/inp.png) repeat-x 0 -14px; color:#fff; }
+a:visited.f_pst { color:#fefefe; }
+a.v_pst { display:inline-block; width:60px; padding:4px 0px; text-align:center; background: #f60 url(../mplus/img/inp.png) repeat-x 0 -14px; color:#fff; margin:-5px 0px 0px; }
+a:visited.v_pst { color:#fefefe; }
+
+/* 相关帖子 */
+.relateitem { padding:20px 0px 5px; }
+.relateitem h3 { padding:5px 0px; border-bottom:2px solid #e5e5e5; line-height:17px; font-size:17px; }
+.relateitem li { border-top:1px solid #e5e5e5; padding:8px 0px; }
+.relateitem li a { color:#444 !important; }
+
+/* 标签 */
+.tags { min-height:18px; padding:10px 0px 5px 22px; line-height:20px; font-size:15px; background: url(../mplus/img/tag.gif) no-repeat 0 10px; }
+.taglist { padding-top:20px; line-height:15px; font-size:15px; }
+.taglist a { margin:0px 10px 15px 0px; display:inline-block; padding:5px 7px 3px; background:#eee; }

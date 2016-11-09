@@ -12,8 +12,12 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.vip.VipInfo;
+import com.vip.VipManeger;
+
 public class VipLoginFilter extends BaseFiler{
 public static final String defVipLoginSrc="/vip/login.jsp";
+public static final String DEF_HOME_PAGE="/vip/home.jsp";
 	@Override
 	public void destroy() {
 		// TODO Auto-generated method stub
@@ -37,15 +41,20 @@ public static final String defVipLoginSrc="/vip/login.jsp";
 
 	
 		
-//		if(!request.getServletPath().equals(defVipLoginSrc))
-//		{
-//			System.err.println(request.getServletPath());
-//			RequestDispatcher dispatcher = request.getRequestDispatcher(defVipLoginSrc);
-//			dispatcher.forward(request, response);
-//		  
-//			 return ;
-//			
-//		}
+		if(request.getServletPath().startsWith("/vip/private/"))
+		{
+			
+			VipInfo info=VipManeger.instance.getVipInfo(request);
+			if(!info.isLogin)
+			{
+			System.err.println(request.getServletPath());
+			RequestDispatcher dispatcher = request.getRequestDispatcher(DEF_HOME_PAGE);
+			dispatcher.forward(request, response);
+		  
+			 return ;
+			}
+			
+		}
 		filterChain.doFilter(request, response);
 	}
 

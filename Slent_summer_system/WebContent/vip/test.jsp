@@ -10,5 +10,6 @@
 123213213
 <% System.err.print("hewq");%>
 <%=request.getContextPath()%>
+<%=request.getServletPath()%>
 </body>
 </html>

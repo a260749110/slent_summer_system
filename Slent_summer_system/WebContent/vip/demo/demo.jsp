@@ -7,7 +7,7 @@
 <head>
 <title>夏不语欢迎您</title>
 	<!-- links -->
-	<jsp:include page="layout/links.jsp"></jsp:include>
+	<jsp:include page="../layout/links.jsp"></jsp:include>
 	<!-- //links -->
 </head>
 <%
@@ -15,10 +15,10 @@
 %>
 <body class="bg">
 	<!-- nav -->
-	<jsp:include page="layout/nav.jsp"></jsp:include>
+	<jsp:include page="../layout/nav.jsp"></jsp:include>
 	<!-- //nav -->
 	<!-- logo -->
-<jsp:include page="layout/logo.jsp"></jsp:include>
+<jsp:include page="../layout/logo.jsp"></jsp:include>
 	<!-- //logo -->
 	<!-- banner -->
 	
