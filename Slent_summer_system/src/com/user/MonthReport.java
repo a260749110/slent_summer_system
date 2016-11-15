@@ -23,6 +23,7 @@ import com.Config;
 import com.data.DataHelper;
 import com.ly.tool.emailTool.EmailData;
 import com.ly.tool.emailTool.EmailSender;
+import com.report.MonthlyReport;
 import com.sql.mapperBean.TMonegChange;
 import com.sql.mapperBean.TSilemtSummerSellInfo;
 
@@ -54,6 +55,7 @@ public class MonthReport {
 	private WritableSheet moneyPortSheet;
 	private WritableSheet payfSheet;
 	private WritableSheet deleteSellSheet;
+	private WritableSheet landReportSheet;
 	public void init() throws Exception {
 		workbook = Workbook.createWorkbook(new File(fileName));
 
@@ -62,10 +64,13 @@ public class MonthReport {
 		moneyPortSheet= workbook.createSheet("交班缺钱报表", 2);
 		payfSheet = workbook.createSheet("支付情况", 3);
 		deleteSellSheet= workbook.createSheet("退单情况", 4);
+		landReportSheet=workbook.createSheet("班次信息", 5);
 		// Label label = new Label(1,1,"测试");
 		// ws.addCell(label);
 		initMoneyChangData();
 		initPayInfo();
+		MonthlyReport monthlyReport=new MonthlyReport(month);
+		monthlyReport.fillSheet(workbook, 6);
 		workbook.write();
 		workbook.close();
 	}
@@ -79,8 +84,10 @@ public void out()
 	 emailData.title  = month+  "月月报";
 	 emailData.data=month+  "月月报";
 	 emailData.files.put(fileName, new File(fileName));
+	 
 	 emailSender.send(emailData);
 }
+	
 	private void initMoneyChangData() throws Exception {
 		List<TMonegChange> dataList = MonthDataManager.instance
 				.getMoneyChangeManeger(month);

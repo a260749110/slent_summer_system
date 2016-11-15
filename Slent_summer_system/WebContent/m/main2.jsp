@@ -17,11 +17,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>诺亚系统</title>
+<title>诺亚系统  操作员：<%=LandManager.instance.getOnlandId()%></title>
 <script src="../js/jquery-1.12.0.min.js"></script>
 <script src="../js/lib.js"></script>
 <script src="silent_summer.js"></script>
-
+<script src="../js/main/main.js"></script>
 
 <link href="main.css" rel="stylesheet" type="text/css" />
 
@@ -237,9 +237,9 @@ var menuMap=new Map();
 			<input
 			class="button1" name="" type="button" value="提款"
 			onclick="window.open('money_get.jsp','big','fullscreen=yes')" />
-		<div class="time">
-			操作员：<span id="Clock"><%=LandManager.instance.getOnlandId()%></span>
-		</div>
+			<input
+			class="button1" name="" type="button" value="会员礼物兑换"
+			onclick="vipGiftDivShow()" />
 		<div class="clear"></div>
 		<div id="payBlock"
 			style="width: 100%; height: 85%; display: block; position: absolute; top: 15%; left: 0%; background-color: white; text-align: center;">

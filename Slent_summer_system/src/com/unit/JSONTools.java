@@ -53,10 +53,16 @@ public class JSONTools {
 				field[i].setAccessible(true);
 				if (field[i].getType().toString().startsWith("class java.lang")) {
 					try {
-						field[i].set(obj, fromJSON.get(name));
+						if(field[i].getType()==Long.class)
+						{
+							field[i].set(obj, (long)(fromJSON.getLong(name)));
+							continue;
+						}
+						field[i].set(obj, field[i].getType().cast(fromJSON.get(name)));
 
 					} catch (Exception e) {
 						// TODO: handle exception
+						e.printStackTrace();
 					}
 					continue;
 				}
@@ -156,7 +162,7 @@ public class JSONTools {
 					}
 					continue;
 				}
-				System.err.println(o.getClass());
+			//	System.err.println(o.getClass());
 				if (o.getClass().toString().startsWith("class java.lang")) {
 					jb.put(name, o);
 					continue;

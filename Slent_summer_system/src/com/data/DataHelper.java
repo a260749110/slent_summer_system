@@ -177,6 +177,18 @@ public void updataSvipById(SVip sVip)
 		session.close();
 		return list;
 	}
+	public List<TSilemtSummerSellInfo> getSellInfosByVipRechargeAndLandId(int landId)
+	{
+		SqlSession session=MyBatisManager.instance.getSession();
+		TSilemtSummerSellInfoMapper mapper=session.getMapper(TSilemtSummerSellInfoMapper.class);
+		TSilemtSummerSellInfoExample example=new TSilemtSummerSellInfoExample();
+		
+		example.createCriteria().andSellIdEqualTo(-1).andUserIdEqualTo(landId);
+		List<TSilemtSummerSellInfo>  list =mapper.selectByExample(example);
+		
+		session.close();
+		return list;
+	}
 	public boolean saveChoice(TMenuChoice choice) {
 		SqlSession session = MyBatisManager.instance.getSession();
 		TMenuChoiceMapper mapper=session.getMapper(TMenuChoiceMapper.class);

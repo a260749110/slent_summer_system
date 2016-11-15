@@ -9,16 +9,33 @@
 	<div class="overlay"></div>
 	<div class="mobile-side-menu">
 		<ul>
-			<li class="active"><a href="<%=request.getContextPath()+"/vip/"%>home.jsp"><i class="fa fa-home"
-					aria-hidden="true"></i>首页</a></li>
+			<li
+				<%=(request.getServletPath().contains("home.jsp")) ? "class='active'" : ""%>><a
+				href="<%=request.getContextPath() + "/vip/"%>home.jsp"><i
+					class="fa fa-home" aria-hidden="true"></i>首页</a></li>
 			<li><a href="menu.html"><i class="fa fa-compass"
 					aria-hidden="true"></i>Our Food</a></li>
 			<li><a href="blog.html"><i class="fa fa-picture-o"
 					aria-hidden="true"></i>Blog</a></li>
 			<li><a href="team.html"><i class="fa fa-users"
 					aria-hidden="true"></i>Our Chef</a></li>
-			<li><a href="<%=request.getContextPath()+"/vip/"%>/private/vipInfo.jsp"><i class="fa fa-dashcube"
-					aria-hidden="true"></i>会员信息</a></li>
+			<%
+				if (vipInfo.isLogin) {
+			%>
+			<li
+				<%=(request.getServletPath().contains("private/vipInfo.jsp")) ? "class='active'" : ""%>><a
+				href="<%=request.getContextPath() + "/vip/"%>private/vipInfo.jsp"><i
+					class="fa fa-dashcube" aria-hidden="true"></i>会员信息</a></li>
+			<li  <%=(request.getServletPath().contains("private/vipPrizeDraw.jsp")) ? "class='active'" : ""%>><a
+				href="<%=request.getContextPath() + "/vip/"%>private/vipPrizeDraw.jsp"><i
+					class="fa fa-compass" aria-hidden="true"></i>积分抽奖</a></li>
+			<li <%=(request.getServletPath().contains("private/myGift.jsp")) ? "class='active'" : ""%>><a
+				href="<%=request.getContextPath() + "/vip/"%>private/myGift.jsp"><i
+					class="fa fa-snapchat" aria-hidden="true"></i>我的奖品</a></li>
+					
+			<%
+				}
+			%>
 			<li><a href="icons.html"><i class="fa fa-random"
 					aria-hidden="true"></i>Web Icons</a></li>
 			<li><a href="contact.html"><i class="fa fa-map-marker"
@@ -38,7 +55,7 @@
 
 				<ul class="wthree_social_icons">
 					<li><a href="javascript:void(0);" class="w3_agileits_facebook"><i
-							class="fa fa-facebook" aria-hidden="true"></i></a></li>
+							class="fa fa-gittip" aria-hidden="true"></i></a></li>
 					<%
 						if (vipInfo.isLogin) {
 					%>
@@ -47,7 +64,8 @@
 					<%
 						} else {
 					%>
-					<li><a style="background: none;" href="<%=request.getContextPath()+"/vip/"%>login/login.jsp">登陆</a></li>
+					<li><a style="background: none;"
+						href="<%=request.getContextPath() + "/vip/"%>login/login.jsp">登陆</a></li>
 					<%
 						}
 					%>
@@ -61,7 +79,8 @@
 		</div>
 	</div>
 </div>
-<script type="text/javascript" src="<%=request.getContextPath()+"/vip/" %>js/slide-from-top.js"></script>
+<script type="text/javascript"
+	src="<%=request.getContextPath() + "/vip/"%>js/slide-from-top.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('.mobile-side-menu').slideFromTop({

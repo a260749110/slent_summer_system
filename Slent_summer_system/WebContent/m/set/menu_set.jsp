@@ -58,7 +58,7 @@ if(!data.permissions.contains("MONEY_GET")&&(!data.permissions.contains("ALL")))
 			<th><a href="payTypeSet.jsp">修改支付方式</a>
 			
 			</tr>
-		<th><a href="..d/info/fuliPage.jsp">福利查看</a>
+		<th><a href="../info/fuliPage.jsp">福利查看</a>
 			
 			</tr>
 		</table>

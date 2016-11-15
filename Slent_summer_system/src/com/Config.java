@@ -34,7 +34,7 @@ public class Config {
 	public static int PRINT_FONT_COUNT=32;
 	 public static String MybBatisConfig = "/conf_local.xml";
 	 public static String Version="1.03";
-	 public static SimpleDateFormat DATEFORMAT=new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
+	 public static SimpleDateFormat DATEFORMAT=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //	 public static final String srcAD =
 //	 "jdbc:mysql://112.124.67.141:3306/wimipay?useUnicode=true&characterEncoding=UTF-8";
 //	 public static final String userAD = "wimipay";

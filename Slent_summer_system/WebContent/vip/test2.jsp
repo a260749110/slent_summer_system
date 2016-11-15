@@ -8,6 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
+<script type="text/javascript" src="test.js"></script>
 <body>
 213
 	<%
@@ -15,6 +16,6 @@
 
 	//response.sendRedirect("<script type='text/javascript'>alert('aa')</script>");
 	%>
-
+<div id ="textDiv">1</div>
 </body>
 </html>
