@@ -1,15 +1,10 @@
 package com.report;
 
 import java.sql.Timestamp;
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import javax.servlet.jsp.tagext.IterationTag;
 
 import org.apache.ibatis.session.SqlSession;
 import org.json.JSONObject;
@@ -21,23 +16,22 @@ import com.report.enumCells.EMoneyChangeType;
 import com.sql.MyBatisManager;
 import com.sql.mapper.TLandIdMapper;
 import com.sql.mapper.TMonegChangeMapper;
+import com.sql.mapperBean.SVip;
 import com.sql.mapperBean.TLandId;
 import com.sql.mapperBean.TLandIdExample;
 import com.sql.mapperBean.TMonegChange;
 import com.sql.mapperBean.TMonegChangeExample;
 import com.sql.mapperBean.TSilemtSummerSellInfo;
-import com.sun.javafx.scene.control.skin.TitledPaneSkin;
-import com.user.LandManager;
+import com.sql.mapperBean.TUser;
+import com.user.UserManager;
+import com.user.vip.SSVipManager;
 
-import jxl.CellFormat;
-import jxl.Workbook;
+import jxl.write.Formula;
 import jxl.write.Label;
 import jxl.write.Number;
-import jxl.write.NumberFormats;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
-import jxl.write.biff.RowsExceededException;
 
 public class MonthlyReport {
 	private List<TLandId> landList;
@@ -52,9 +46,9 @@ public class MonthlyReport {
 		if (landList != null) {
 			for (TLandId land : landList) {
 				ClassReport dayReport = new ClassReport(land);
-				
+
 				classReportMap.put(land.getLandId(), dayReport);
-			
+
 				classReportList.add(dayReport);
 			}
 		}
@@ -84,7 +78,7 @@ public class MonthlyReport {
 
 		List<TSilemtSummerSellInfo> list = DataHelper.instance
 				.getSellInfosByVipRechargeAndLandId(classReport.getLandId().getLandId());
-		System.err.println("id:"+ classReport.getLandId().getLandId()+ "  size :"+list.size());
+		System.err.println("id:" + classReport.getLandId().getLandId() + "  size :" + list.size());
 		List<OndutyData> ondutyDatas = classReport.getOndutyList();
 		if (ondutyDatas.size() == 0) {
 			System.err.println(classReport.getLandId().getLandId());
@@ -98,7 +92,8 @@ public class MonthlyReport {
 			}
 			for (OndutyData ondutyData : ondutyDatas) {
 				ondutyData.setVipMoney(ondutyData.getVipMoney() + all / size);
-				//System.err.println(ondutyData.getName() +" :"+ondutyData.getVipMoney());
+				// System.err.println(ondutyData.getName() +"
+				// :"+ondutyData.getVipMoney());
 			}
 		}
 
@@ -168,8 +163,7 @@ public class MonthlyReport {
 					if (classReport != null) {
 						List<OndutyData> list = classReport.getOndutyList();
 						float size = list.size();
-						if (size != 0)
-						{
+						if (size != 0) {
 							for (OndutyData ondutyData : list) {
 								ondutyData.setDifMoney(ondutyData.getDifMoney() + change.getMoneyChange() / size);
 							}
@@ -232,8 +226,7 @@ public class MonthlyReport {
 				System.err.println("classReport null");
 			List<OndutyData> ondutylist = classReport.getOndutyList();
 			float size = ondutylist.size();
-			if (size >0)
-			{
+			if (size > 0) {
 				for (OndutyData ondutyData : ondutylist) {
 					ondutyData.setDifMoney(ondutyData.getDifMoney() + change.getMoneyChange() / size);
 				}
@@ -242,7 +235,7 @@ public class MonthlyReport {
 				classReport.setTip(tip.getString("tip") + "  。");
 			} catch (Exception e) {
 				// TODO: handle exception
-				
+
 			}
 
 		} catch (Exception e) {
@@ -258,6 +251,35 @@ public class MonthlyReport {
 	 * @param change
 	 */
 	private void moneyChange_cash_purchase_handler(TMonegChange change) {
+		TUser tUser = UserManager.instance.getUser(change.getChangeUser());
+
+		if (change == null )
+			return;
+		try {
+			JSONObject tip = new JSONObject(change.getTip());
+			ClassReport classReport = classReportMap.get(tip.get("landId"));
+			if (classReport == null)
+				System.err.println("classReport null");
+			List<OndutyData> ondutylist = classReport.getOndutyList();
+			float size = ondutylist.size();
+			if (size > 0) {
+				for (OndutyData ondutyData : ondutylist) {
+					if (ondutyData.getId().equals(tUser.getName())) {
+						ondutyData.setPurchaseMoney(ondutyData.getPurchaseMoney() + change.getMoneyChange());
+					}
+				}
+			}
+			try {
+				classReport.setTip(tip.getString("tip") + "  。");
+			} catch (Exception e) {
+				// TODO: handle exception
+
+			}
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
 
 	}
 
@@ -267,6 +289,37 @@ public class MonthlyReport {
 	 * @param change
 	 */
 	private void moneychange_cash_recording_handler(TMonegChange change) {
+		TUser tUser = UserManager.instance.getUser(change.getChangeUser());
+
+		if (change == null)
+			return;
+		try {
+			JSONObject tip = new JSONObject(change.getTip());
+			ClassReport classReport = classReportMap.get(tip.get("landId"));
+			if (classReport == null)
+				System.err.println("classReport null");
+			List<OndutyData> ondutylist = classReport.getOndutyList();
+			float size = ondutylist.size();
+			if (size > 0) {
+				for (OndutyData ondutyData : ondutylist) {
+					if (ondutyData.getId().equals(tUser.getName())) {
+						ondutyData.setRecordingMoney(ondutyData.getRecordingMoney() + change.getMoneyChange());
+					}
+				}
+			}
+			try {
+				classReport.setTip(tip.getString("tip") + "  。");
+			} catch (Exception e) {
+				// TODO: handle exception
+
+			}
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+
+	
 
 	}
 
@@ -276,6 +329,37 @@ public class MonthlyReport {
 	 * @param change
 	 */
 	private void moneychange_cash_dividend_handler(TMonegChange change) {
+		TUser tUser = UserManager.instance.getUser(change.getChangeUser());
+
+		if (change == null )
+			return;
+		try {
+			JSONObject tip = new JSONObject(change.getTip());
+			ClassReport classReport = classReportMap.get(tip.get("landId"));
+			if (classReport == null)
+				System.err.println("classReport null");
+			List<OndutyData> ondutylist = classReport.getOndutyList();
+			float size = ondutylist.size();
+			if (size > 0) {
+				for (OndutyData ondutyData : ondutylist) {
+					if (ondutyData.getId().equals(tUser.getName())) {
+						ondutyData.setDividendMoney(ondutyData.getDividendMoney() + change.getMoneyChange());
+					}
+				}
+			}
+			try {
+				classReport.setTip(tip.getString("tip") + "  。");
+			} catch (Exception e) {
+				// TODO: handle exception
+
+			}
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+
+	
 
 	}
 
@@ -338,74 +422,81 @@ public class MonthlyReport {
 					Cell cell = sheetMap.get(data.getId());
 					if (cell == null) {
 						cell = new Cell();
-						cell.sheet=workbook.createSheet(data.getId(), sheetNow);
+						cell.sheet = workbook.createSheet(data.getId(), sheetNow);
 						sheetNow++;
-						cell.strs = new String[5][classReportList.size()+1];
+						cell.strs = new String[8][classReportList.size() + 2];
 						cell.strs[0][0] = "时间";
+						cell.strs[0][1] = "合计";
 						cell.strs[1][0] = "签到时间";
 						cell.strs[2][0] = "VIP 提成";
 						cell.strs[3][0] = "交班金钱缺失";
-						cell.strs[4][0] = "备注";
+						cell.strs[4][0] = "分红";
+						cell.strs[5][0] = "入货";
+						cell.strs[6][0] = "入账";
+						cell.strs[7][0] = "备注";
+
 						sheetMap.put(data.getId(), cell);
 
 					}
-					cell.allVip+=data.getVipMoney();
-					cell.allDif+=data.getDifMoney();
-					cell.strs[0][i+1] = Config.DATEFORMAT.format(classReport.getStartTime());
-					cell.strs[1][i+1] = Config.DATEFORMAT.format(data.getTime());
-					cell.strs[2][i+1] = data.getVipMoney() + "";
-					cell.strs[3][i+1] = data.getDifMoney() + "";
-					cell.strs[4][i+1] = classReport.getTip();
+					cell.allVip += data.getVipMoney();
+					cell.allDif += data.getDifMoney();
+					cell.allDividendMoney += data.getDividendMoney();
+					cell.allPurchaseMoney += data.getPurchaseMoney();
+					cell.allRecordingMoney+= data.getRecordingMoney();
+					cell.strs[0][i + 2] = Config.DATEFORMAT.format(classReport.getStartTime());
+					cell.strs[1][i + 2] = Config.DATEFORMAT.format(data.getTime());
+					cell.strs[2][i + 2] = data.getVipMoney() + "";
+					cell.strs[3][i + 2] = data.getDifMoney() + "";
+					cell.strs[4][i + 2] = data.getDividendMoney() + "";
+					cell.strs[5][i + 2] = data.getPurchaseMoney() + "";
+					cell.strs[6][i + 2] = data.getRecordingMoney() + "";
+					cell.strs[7][i + 2] = classReport.getTip();
 				}
 			}
 
 		}
 		System.err.println("t11");
 		for (Cell cell : sheetMap.values()) {
-			for (int i = 0; i < 5; i++) {
+			for (int i = 0; i < 8; i++) {
 				for (int j = 0; j < classReportList.size(); j++) {
-					String titleStr=cell.strs[i][j];
-					if(titleStr!=null)
-					{
-						
+					String titleStr = cell.strs[i][j];
+					if (titleStr != null) {
+
 						try {
-							float data=Float.valueOf(titleStr);
-							
-							Number number=new Number(j,i,data);
+							float data = Float.valueOf(titleStr);
+
+							Number number = new Number(j, i, data);
 							cell.sheet.addCell(number);
-							
+
 						} catch (Exception e) {
 							// TODO: handle exception
 							try {
-								Label title=new Label(j,i,titleStr);
+								Label title = new Label(j, i, titleStr);
 								cell.sheet.addCell(title);
-								
+
 							} catch (Exception e1) {
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
-							} 
+							}
 						}
-						
+
 					}
 					
+					if(j==1&&i>=2&&i<=7)
+					{
+						Label formula=new Label(j, i, "=sum(c"+(i+1)+":ca"+(i+1)+")");
+			
+						try {
+							cell.sheet.addCell(formula);
+						} catch (WriteException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
 				}
 			}
-			Label label1 =new Label(0,7,"VIP 提成基数");
-			Label label2 =new Label(0,8,"交班缺钱");
-			Label label3 =new Label(1,7,cell.allVip+"");
-			Label label4 =new Label(1,8,cell.allDif+"");
-			try {
-				cell.sheet.addCell(label1);
-				cell.sheet.addCell(label2);
-				cell.sheet.addCell(label3);
-				cell.sheet.addCell(label4);
-			} catch (RowsExceededException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (WriteException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+
+	
 		}
 
 		// for (ClassReport classReport : classReportMap.values()) {
@@ -434,10 +525,12 @@ public class MonthlyReport {
 	public class Cell {
 
 		WritableSheet sheet;
-		float allVip=0;
-		float allDif=0;
+		float allVip = 0;
+		float allDif = 0;
+		float allPurchaseMoney = 0;
+		float allRecordingMoney = 0;
+		float allDividendMoney = 0;
 		String[][] strs;
-
 
 	}
 

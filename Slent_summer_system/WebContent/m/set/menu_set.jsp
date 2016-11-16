@@ -11,75 +11,78 @@
 <title>配置菜单</title>
 </head>
 <%
-if(LandManager.instance.testLand(request, response)<=0)
-{
-response.sendRedirect("login.jsp");
-return;
-}%>
+	if (LandManager.instance.testLand(request, response) <= 0) {
+		response.sendRedirect("login.jsp");
+		return;
+	}
+%>
 <body>
 	<%
-UserData data=LandManager.instance.getUser(request);
-if(!data.permissions.contains("MONEY_GET")&&(!data.permissions.contains("ALL")))
-{
+		UserData data = LandManager.instance.getUser(request);
+		if (!data.permissions.contains("MONEY_GET") && (!data.permissions.contains("ALL"))) {
 	%>你并没有权限！<%
-	return ;}
-%>
+		return;
+		}
+	%>
 	<div style="width: 100%; background-color: aqua;">
-		<label>配置</label> 
+		<label>配置</label>
 		<button onclick="sendMouthData()">发送月报</button>
 	</div>
 	<div>
-	<table width="100%">
-	<tr>
-	
-	</tr>
-	 </table>
+		<table width="100%">
+			<tr>
+
+			</tr>
+		</table>
 	</div>
 	<div>
 		<table>
-			<tr><th><a href="VIPSet.jsp">VIP策略配置</a></th>
+			<tr>
+				<th><a href="VIPSet.jsp">VIP策略配置</a></th>
 			</tr>
 			<tr>
-			<th><a href="groupSet.jsp">菜品配置</a>
+				<th><a href="groupSet.jsp">菜品配置</a></th>
 			</tr>
-			<th><a href="otherSet.jsp">选项配置</a>
-			
+			<th><a href="otherSet.jsp">选项配置</a></th>
+
 			<tr>
-			<th><a href="lineSet.jsp">菜单配置</a>
-			</tr>
-			<tr>
-			<th><a href="userCreate.jsp">新建操作员</a>
+				<th><a href="lineSet.jsp">菜单配置</a></th>
 			</tr>
 			<tr>
-			<th><a href="userSet.jsp">修改操作员</a>
-			
+				<th><a href="userCreate.jsp">新建操作员</a></th>
 			</tr>
 			<tr>
-			<th><a href="payTypeSet.jsp">修改支付方式</a>
-			
+				<th><a href="userSet.jsp">修改操作员</a></th>
+
 			</tr>
-		<th><a href="../info/fuliPage.jsp">福利查看</a>
-			
+			<tr>
+				<th><a href="payTypeSet.jsp">修改支付方式</a></th>
+
+			</tr>
+			<th>
+			<a href="../info/fuliPage.jsp">福利查看</a></th>
+			<tr>
+			<th><a href="giftItemSet.jsp">奖品设置</a></th>
+			</tr>
+			<tr>
+				<th><a href="../info/fuliPage.jsp">福利查看</a></th>
+
 			</tr>
 		</table>
 	</div>
 </body>
 <script type="text/javascript">
+	function sendMouthData() {
+		alert("a");
+		$.post("mouthDataOutHelper.jsp", {
+			id : 1,
+			money : 1
 
-function sendMouthData()
-{
-	alert("a");
-	$.post("mouthDataOutHelper.jsp", {
-		id :  1,
-		money : 1
-		
-	}, function(data, status) {
-	
-		alert( data.trim() );
-	
-	
-		
-	});
+		}, function(data, status) {
+
+			alert(data.trim());
+
+		});
 	}
 </script>
 </html>

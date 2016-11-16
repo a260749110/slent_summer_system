@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.tomcat.util.log.UserDataHelper;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,7 +15,6 @@ import org.json.JSONObject;
 import com.Config;
 import com.sql.mapperBean.TLandId;
 import com.sql.mapperBean.TUser;
-import com.user.DataReport;
 import com.user.UserManager;
 
 public class ClassReport {
@@ -26,7 +24,7 @@ public class ClassReport {
 	private Date startTime;
 	private float money_cash = 0;
 	private float moeny_dif = 0;
-	private StringBuffer tip;
+	private StringBuffer tip=new StringBuffer();;
 
 	public ClassReport(TLandId landId) {
 		this.setLandId(landId);
@@ -83,13 +81,17 @@ public class ClassReport {
 		this.moeny_dif = moeny_dif;
 	}
 
+
+	
 	public static class OndutyData {
 		private String id;
 		private String name;
 		private Timestamp time;
 		private float vipMoney = 0;
 		private float difMoney = 0;
-
+		private	float purchaseMoney=0;
+		private	float recordingMoney=0;
+		private	float dividendMoney=0;
 		private OndutyData(JSONObject jb) throws JSONException, ParseException {
 
 			setId(jb.getString("id"));
@@ -158,6 +160,30 @@ public class ClassReport {
 		public void setDifMoney(float difMoney) {
 			this.difMoney = difMoney;
 		}
+
+		public float getPurchaseMoney() {
+			return purchaseMoney;
+		}
+
+		public void setPurchaseMoney(float purchaseMoney) {
+			this.purchaseMoney = purchaseMoney;
+		}
+
+		public float getRecordingMoney() {
+			return recordingMoney;
+		}
+
+		public void setRecordingMoney(float recordingMoney) {
+			this.recordingMoney = recordingMoney;
+		}
+		
+		public float getDividendMoney() {
+			return dividendMoney;
+		}
+
+		public void setDividendMoney(float dividendMoney) {
+			this.dividendMoney = dividendMoney;
+		}
 	}
 
 	public List<OndutyData> getOndutyList() {
@@ -169,11 +195,13 @@ public class ClassReport {
 	}
 
 	public String getTip() {
+		if(tip==null||tip.length()==0)
+			return "";
 		return tip.toString();
 	}
 
 	public void setTip(String tip) {
-		this.tip.append(tip);
+		this.tip.append(";").append(tip);
 	}
 
 	public TLandId getLandId() {

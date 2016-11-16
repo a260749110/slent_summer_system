@@ -8,7 +8,10 @@ import com.vip.interfaceCells.impl.GiftSaveHandler;
 public enum EGiftType {
 	UKONW(-1,"未知",new GiftNullHandler()),
 	GIFT_REAL(0,"实物兑换",new GiftSaveHandler()),
-	INTEGRAL_RETURN(1,"积分返还",new GiftIntegralReturnHandler());
+	INTEGRAL_RETURN(1,"积分返还",new GiftIntegralReturnHandler()),
+	GIFT_COMMODITY(2,"商品赠送",new GiftIntegralReturnHandler()),
+	FULL_CUT(3,"满减",new GiftIntegralReturnHandler()),
+	CUT_OFF(4,"折扣",new GiftIntegralReturnHandler());
 private GiftHandler handler;
 private int type;
 private String desc;
