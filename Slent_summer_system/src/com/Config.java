@@ -2,6 +2,8 @@ package com;
 
 import java.text.SimpleDateFormat;
 
+import javax.servlet.http.HttpServletRequest;
+
 
 public class Config {
 	// 商用
@@ -35,6 +37,10 @@ public class Config {
 	 public static String MybBatisConfig = "/conf_local.xml";
 	 public static String Version="1.03";
 	 public static SimpleDateFormat DATEFORMAT=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	 public static String getHelperSrc(HttpServletRequest request)
+	 {
+		 return request.getContextPath()+"/m/helper/helper.jsp";
+	 }
 //	 public static final String srcAD =
 //	 "jdbc:mysql://112.124.67.141:3306/wimipay?useUnicode=true&characterEncoding=UTF-8";
 //	 public static final String userAD = "wimipay";

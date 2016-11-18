@@ -9,6 +9,7 @@ import javax.servlet.jsp.JspWriter;
 
 import org.json.JSONObject;
 
+import com.page.PageHandler.AddNewGiftItem;
 import com.page.PageHandler.EPageHandlerKey;
 import com.page.PageHandler.PageHandlerInterface;
 import com.page.PageHandler.VipGiftSelectHandler;
@@ -20,6 +21,7 @@ public class PageHelperManeger {
 	private PageHelperManeger() {
 		handlerMap = new HashMap<>();
 		handlerMap.put(EPageHandlerKey.VIP_GIFT_SELECT, new VipGiftSelectHandler());
+		handlerMap.put(EPageHandlerKey.ADD_NEW_GIFT_ITEM, new AddNewGiftItem());
 	}
 
 	public void handle(EPageHandlerKey key, HttpServletRequest request, HttpServletResponse response, JspWriter out) {
