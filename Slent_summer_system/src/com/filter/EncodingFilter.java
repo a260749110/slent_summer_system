@@ -15,7 +15,7 @@ public class EncodingFilter implements Filter {
 	 public void init(FilterConfig config) throws ServletException {
 
 	  this.config = config;
-	  this.Encoding = config.getInitParameter("Encoding");
+	  this.Encoding = config.getInitParameter("Encoding"  );
 
 	 }
 
