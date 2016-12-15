@@ -22,6 +22,7 @@ import com.sql.mapperBean.TLandId;
 import com.sql.mapperBean.TLandInfo;
 import com.sql.mapperBean.TUser;
 import com.sun.org.apache.bcel.internal.generic.LNEG;
+import com.unit.TimeManager;
 
 
 public class LandManager {
@@ -113,6 +114,9 @@ public class LandManager {
 	
 	public int land(String name,String passw,HttpServletRequest request)
 	{
+		
+		TimeManager.init();
+		
 		SqlSession session=MyBatisManager.instance.getSession();
 		TUserMapper mapper=session.getMapper(TUserMapper.class);
 		TUser tUser=mapper.selectByPrimaryKey(name);
