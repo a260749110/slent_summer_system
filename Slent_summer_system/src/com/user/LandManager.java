@@ -230,9 +230,11 @@ return str.toString();
 public void unLand()
 {
 	landId.setIsClose(true);
+	landId.setEndTime(new Date(System.currentTimeMillis()));
 	SqlSession session=MyBatisManager.instance.getSession();
 	TLandIdMapper mapper=session.getMapper(TLandIdMapper.class);
 	mapper.updateByPrimaryKey(landId);
+	
 	session.commit();
 	landId=null;
 	landUser.clear();
