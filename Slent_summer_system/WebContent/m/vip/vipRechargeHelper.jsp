@@ -1,3 +1,4 @@
+<%@page import="com.unit.Tool"%>
 <%@page import="com.user.vip.SSVipManager.RefereeGive"%>
 <%@page import="com.sql.mapperBean.SVip"%>
 <%@page import="com.data.DataHelper"%>
@@ -74,7 +75,9 @@
 		{
 		msg+="\r\n 赠送："+referee.sVip.getId()+"  金额："+referee.money+"  余额"+referee.sVip.getMoney();
 		}
+		
 		jb.put("msg",msg );
+		Tool.print(msg+"\r\n"+"时间:"+Tool.getNowTimeStr());
 		}
 		}
 	catch(Exception e)

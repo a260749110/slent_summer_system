@@ -2,12 +2,16 @@ package com.spring.service.impl;
 
 import org.springframework.web.context.ContextLoaderListener;
 
+import com.spring.sql.dao.ActivityDao;
 import com.spring.sql.dao.SGiftItemDao;
 import com.spring.sql.dao.SPrizeDrawItemDao;
 import com.spring.sql.dao.SVipDao;
 import com.spring.sql.dao.SVipGiftDao;
 import com.spring.sql.dao.TLandIdDao;
+import com.spring.sql.dao.TMenuGroupDao;
+import com.spring.sql.dao.TMenuLineDao;
 import com.spring.sql.domain.SVipGiftPo;
+import com.spring.sql.domain.TMenuGroupPo;
 
 public class SqlService {
 
@@ -17,17 +21,23 @@ public class SqlService {
 	public TLandIdDao landIdDao;
 	public SVipGiftDao sVipGiftDao;
 	public SGiftItemDao sGiftItemDao;
+	public ActivityDao activityDao;
+	public TMenuGroupDao groupDao;
+	public TMenuLineDao lineDao;
 
 	private SqlService() {
 		sVipDao = getBean(SVipDao.class);
 		landIdDao = getBean(TLandIdDao.class);
 		prizeDrawItemDao = getBean(SPrizeDrawItemDao.class);
-		sVipGiftDao =getBean(SVipGiftDao.class);
-		sGiftItemDao =getBean(SGiftItemDao.class);
+		sVipGiftDao = getBean(SVipGiftDao.class);
+		sGiftItemDao = getBean(SGiftItemDao.class);
+		activityDao = getBean(ActivityDao.class);
+		groupDao = getBean(TMenuGroupDao.class);
+		lineDao = getBean(TMenuLineDao.class);
 
 	}
 
-	private <T> T getBean(Class<T> c) {
+	public static <T> T getBean(Class<T> c) {
 
 		return ContextLoaderListener.getCurrentWebApplicationContext().getBean(c);
 

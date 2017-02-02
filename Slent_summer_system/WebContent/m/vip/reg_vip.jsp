@@ -127,12 +127,18 @@ if(event.keyCode==13)
 function reg()
 {
 var passw=	$("input[name='vip_passw']").val();
+var vip_id=	$("input[name='vip_id']").val();
 var passwRepick=$("input[name='passwRepick']").val();
 if(passw.length<=3)
 	{
 	alert("密码长度大于3");
 	return;
 	}
+if(vip_id.length<=3)
+{
+alert("账号长度大于3");
+return;
+}
 if(passw!=passwRepick)
 {
 alert("两次输入密码不一样");

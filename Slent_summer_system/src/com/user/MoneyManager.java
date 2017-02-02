@@ -9,7 +9,9 @@ import org.apache.ibatis.session.SqlSession;
 import com.sql.MyBatisManager;
 import com.sql.mapper.TMonegChangeMapper;
 import com.sql.mapper.TMoneyChangeTypeMapper;
+import com.sql.mapperBean.TLandId;
 import com.sql.mapperBean.TMonegChange;
+import com.sql.mapperBean.TMonegChangeExample;
 import com.sql.mapperBean.TMoneyChangeType;
 import com.sql.mapperBean.TMoneyChangeTypeExample;
 
@@ -29,7 +31,20 @@ public class MoneyManager {
 
 		return result;
 	}
+	public List<TMonegChange> getMoneyChangeList(TLandId landId) {
+		 List<TMonegChange> result;
+		SqlSession session = MyBatisManager.instance.getSession();
+		TMonegChangeMapper mapper = session.getMapper(TMonegChangeMapper.class);
+		TMonegChangeExample example=new TMonegChangeExample();
+		example.createCriteria().andTimeGreaterThanOrEqualTo(landId.getLandTime());
+		
+		
+		
+		 result=mapper.selectByExampleWithBLOBs(example);
+		session.close();
 
+		return result;
+	}
 	public String getMonetChangeTpye(int id) {
 		SqlSession session = MyBatisManager.instance.getSession();
 		String str = "";

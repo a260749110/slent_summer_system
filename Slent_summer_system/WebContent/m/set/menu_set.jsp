@@ -65,7 +65,7 @@
 			<th><a href="giftItemSet.jsp">奖品设置</a></th>
 			</tr>
 			<tr>
-				<th><a href="../info/fuliPage.jsp">福利查看</a></th>
+				<th><a href="activity/activitySet.jsp">配置活动</a></th>
 
 			</tr>
 		</table>

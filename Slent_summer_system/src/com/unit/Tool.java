@@ -2,6 +2,9 @@ package com.unit;
 
 import java.io.ByteArrayInputStream;
 import java.lang.reflect.Field;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Map;
 
 import javax.print.Doc;
 import javax.print.DocFlavor;
@@ -13,6 +16,7 @@ import javax.print.SimpleDoc;
 import javax.print.attribute.DocAttributeSet;
 import javax.print.attribute.HashDocAttributeSet;
 import javax.print.attribute.HashPrintRequestAttributeSet;
+import javax.servlet.http.HttpServletRequest;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -183,6 +187,11 @@ public class Tool {
         {
         	System.err.println(" print:"+printStr);}
 	
+	} 
+	public static SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	public static String getNowTimeStr()
+	{
+		return dateFormat.format(new Date(System.currentTimeMillis()));
 	}
 	public static void print(String printStr)
 	{
@@ -265,5 +274,14 @@ public class Tool {
 			fillChars[i]=fill;
 		}
 		return str+new String(fillChars);
+	}
+	public static com.alibaba.fastjson.JSONObject httpPostToJS(HttpServletRequest request)
+	{
+		com.alibaba.fastjson.JSONObject js=new com.alibaba.fastjson.JSONObject();
+		Map<String, String[]> maps=request.getParameterMap();
+		for (String str:maps.keySet()) {
+			js.put(str, maps.get(str)[0]);
+		}
+		return js;
 	}
 }
